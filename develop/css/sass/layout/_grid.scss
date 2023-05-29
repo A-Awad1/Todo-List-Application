@@ -1,0 +1,22 @@
+.container {
+  padding: {
+    left: 15px;
+    right: 15px;
+  }
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  @include underTablet {
+      width: 100%;
+  }
+  @include aboveTablet {
+      width: 750px;
+  }
+  @include aboveMedium {
+      width: 970px;
+  }
+  @include aboveLarge {
+      width: 1170px;
+  }
+} 

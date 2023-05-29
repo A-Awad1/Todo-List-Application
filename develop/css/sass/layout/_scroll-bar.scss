@@ -1,0 +1,18 @@
+html {
+  scroll-behavior: smooth;
+}
+$scroll : "::-webkit-scrollbar";
+
+#{$scroll}{
+  width: 15px;
+}
+#{$scroll}-track{
+  background-color: $main-text-color;
+}
+#{$scroll}-thumb{
+  cursor: pointer;
+  border-radius:$main-border-radius;
+  & , &:hover{
+    background-color: $main-background-color;
+  }
+}
