@@ -1,0 +1,97 @@
+/* colors */
+/* Light Theme */
+/* Dark Theme */
+/* colors */
+/* Light Theme */
+/* Dark Theme */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*:focus {
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-style: none;
+}
+
+input,
+select,
+textarea,
+button,
+optgroup {
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+body {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (min-width: 768.1px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992.1px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200.1px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #171c26;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(0deg, 0%, 98%);
+}
+/*# sourceMappingURL=main.css.map */

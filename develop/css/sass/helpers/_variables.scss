@@ -1,27 +1,29 @@
-$Awesome : "Font Awesome 6 Free";
+$Awesome: "Font Awesome 6 Free";
 
-$main-transition : 0.3s;
-$second-transition : 0.5s;
+$main-transition: 0.3s;
+$second-transition: 0.5s;
 
-$main-border-radius:6px;
-$second-border-radius:4px;
+$main-border-radius: 6px;
+$second-border-radius: 4px;
 
-$main-padding : 20px;
+$main-padding: 20px;
 
-$nav-width:220px;
+$nav-width: 220px;
 
 /* colors */
 
+/* Light Theme */
+
 // text
-$main-text-color: #171C26;
-$second-text-color: #464F60;
+$main-text-color: #171c26;
+$second-text-color: #464f60;
 $third-text-color: #687182;
 
 // background
-$main-background-color:#ffffff;
-$second-background-color:#F9FAFC;
-$third-background-color: #2264E53D;
+$main-background-color: hsl(0, 0%, 98%);
+$second-background-color: #f9fafc;
+$third-background-color: #2264e53d;
 
-// global 
-$primary-color:#2264E5;
-$danger-color:#AD2A2A;
+// global
+
+/* Dark Theme */
