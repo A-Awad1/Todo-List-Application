@@ -1,28 +1,24 @@
-include pug/includes/variables
-include pug/includes/mixins
-
-block direction
-  -let dir = "ltr"
+block includes
+  include pug/includes/english-variables
 
 doctype
 html(lang="en", dir=dir)
   head
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="description", content="this is a front-end project")
+    meta(name="description", content="this is a todo list application")
     link(
       rel="icon",
       type="image/png",
       sizes="32x32",
-      href="./images/favicon-32x32.png"
+      href="../images/favicon-32x32.png"
     )
-    block pageTitle
-      title project
+    title #{pageTitle}
     block externalFiles
       //- Font Awesome Library
-      link(rel="stylesheet", href="CSS/libraries/all.min.css")
+      link(rel="stylesheet", href="css/all.min.css")
       //- Main Template CSS File
-      link(rel="stylesheet", href="CSS/main.css")
+      link(rel="stylesheet", href="css/main.css")
     //- Google Fonts
     link(rel="preconnect", href="https://fonts.googleapis.com")
     link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
@@ -30,11 +26,29 @@ html(lang="en", dir=dir)
   body
     //- Start Page Content
     block pageContent
-      div 
+      main
+        section
+          header 
+            span #{appName}
+            i(class="fa-solid fa-moon")
+          .add-todo
+            .checkbox-container
+              input(type='checkbox')
+            input(type='text' , dir='auto' , placeholder=addPlaceHolder)
+          .all-todos
+          .control-filter
+            div.items-left
+              span 
+              span #{itemsLeft}
+            .filters 
+              each text,filter in filters ? filters : []
+                span(id=`filter-${filter}`) #{text}
+            span.removeAll #{removeAll}
+          .span #{reorderGuide}
     //- End Page Content
     //- Start External Script Files
     //- Font Awesome Library
-    script(src="JS/libraries/all.min.js")
+    script(src="js/all.min.js")
     //- Main Template js File
-    script(src="JS/main.js")
+    script(src="js/main.js")
     //- End External Script Files

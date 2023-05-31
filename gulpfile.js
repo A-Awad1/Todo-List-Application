@@ -35,15 +35,45 @@ function sassTask() {
   );
 }
 
-// concat JS Files in one file and compress it
+// concat js Files in one file and compress it
 function jsTask() {
   return (
-    src(["develop/JS/**/*.js", "!develop/JS/libraries/*.*"])
+    src(["develop/js/**/*.js", "!develop/js/libraries/*.*"])
       .pipe(concat("main.js"))
       // .pipe(uglify())
       .pipe(dest("dist/js"))
       .pipe(connect.reload())
   );
+}
+
+// add css libraries to dist folder
+function cssLibrariesTask() {
+  return src([
+    "develop/css/libraries/*.*",
+    "!develop/css/libraries/all.min.css",
+  ]).pipe(dest("dist/css/libraries"));
+}
+
+// add js libraries to dist folder
+function jsLibrariesTask() {
+  return src([
+    "develop/js/libraries/*.*",
+    "!develop/js/libraries/all.min.js",
+  ]).pipe(dest("dist/js/libraries"));
+}
+
+// add Font Awesome Library Files to dist folder
+function fontAwesomeTask() {
+  return [
+    src("develop/webfonts/*.*").pipe(dest("dist/webfonts")),
+    src("develop/css/libraries/all.min.css").pipe(dest("dist/css")),
+    src("develop/js/libraries/all.min.js").pipe(dest("dist/js")),
+  ];
+}
+
+// add images to dist folder
+function imagesTask() {
+  return src("develop/images/*.*").pipe(dest("dist/images"));
 }
 
 // compress all files in dist folder
@@ -57,6 +87,10 @@ function watchTask() {
   pugTask();
   sassTask();
   jsTask();
+  cssLibrariesTask();
+  jsLibrariesTask();
+  fontAwesomeTask();
+  imagesTask();
   compressTask();
 
   connect.server({
@@ -68,7 +102,11 @@ function watchTask() {
 
   watch("develop/**/*.pug", pugTask);
   watch("develop/css/**/*.scss", sassTask);
-  watch("develop/JS/**/*.js", jsTask);
+  watch("develop/js/**/*.js", jsTask);
+
+  watch("develop/css/libraries/*.*", cssLibrariesTask);
+  watch("develop/js/libraries/*.*", jsLibrariesTask);
+  watch("develop/images/*.*", imagesTask);
   // watch("dist/**/*.*", compressTask);
 }
 
@@ -76,4 +114,8 @@ exports.default = watchTask;
 exports.sassTask = sassTask;
 exports.pugTask = pugTask;
 exports.jsTask = jsTask;
+exports.cssLibrariesTask = cssLibrariesTask;
+exports.jsLibrariesTask = jsLibrariesTask;
+exports.fontAwesomeTask = fontAwesomeTask;
+exports.imagesTask = imagesTask;
 exports.compressTask = compressTask;

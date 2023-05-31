@@ -1,11 +1,8 @@
 extends index
 
-block direction
-  -let dir = "rtl"
-
-block pageTitle
-  title تحدي
+block includes
+  include pug/includes/arabic-variables
 
 append externalFiles
   //- Main Template CSS File RTL
-  link(rel="stylesheet", href="CSS/main-rtl.css")
+  link(rel="stylesheet", href="css/main-rtl.css")

@@ -1,0 +1,50 @@
+main {
+  min-height: 100vh;
+  background: {
+    color: $main-background-color;
+    image: url(../images/bg-desktop-light.jpg);
+    repeat: no-repeat;
+    size: contain;
+  }
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  > section {
+    width: 500px;
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: $main-background-color;
+      font-size: 35px;
+      span {
+        font-weight: 700;
+        letter-spacing: 10px;
+      }
+    }
+    .add-todo {
+      background-color: $main-background-color;
+      border-radius: $main-border-radius;
+      margin: 30px 0 20px;
+      padding: 20px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .checkbox-container {
+        pointer-events: none;
+      }
+      input[type="text"] {
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        margin-bottom: -3px;
+        color: $main-text-color;
+        &::placeholder {
+          color: $second-text-color;
+        }
+      }
+    }
+  }
+}

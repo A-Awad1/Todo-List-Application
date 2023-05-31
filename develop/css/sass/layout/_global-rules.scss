@@ -22,12 +22,14 @@ select,
 textarea,
 button,
 optgroup {
-  cursor: pointer;
   font: {
     size: inherit;
     family: inherit;
   }
   color: inherit;
+  &:not(input[type="text"], input[type="password"], input[type="email"]) {
+    cursor: pointer;
+  }
 }
 body {
   font: {
@@ -35,4 +37,5 @@ body {
     weight: 400;
     size: 18px;
   }
+  color: $main-text-color;
 }

@@ -1,0 +1,40 @@
+.checkbox-container {
+  height: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: $main-border-color;
+  position: relative;
+  $checkbox: 'input[type= "checkbox"]';
+  #{$checkbox} {
+    appearance: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    transform: scale(0.9);
+    background-color: $main-background-color;
+    transition: $main-transition;
+    &:checked {
+      transform: scale(1);
+      background-image: linear-gradient(130deg, $sky-color, $pink-color);
+    }
+  }
+  &:has(#{$checkbox}:hover) {
+    background-image: linear-gradient(130deg, $sky-color, $pink-color);
+  }
+  &:has(#{$checkbox}:checked) {
+    &::after {
+      content: "\f00c";
+      font: {
+        family: $Awesome;
+        weight: 700;
+        size: 10px;
+      }
+      color: $main-background-color;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+  }
+}
