@@ -6,7 +6,7 @@ main {
     repeat: no-repeat;
     size: contain;
   }
-  padding: 50px;
+  padding-top: 80px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -14,13 +14,19 @@ main {
     width: 500px;
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       color: $main-background-color;
-      font-size: 35px;
+      font-size: 25px;
       span {
-        font-weight: 700;
-        letter-spacing: 10px;
+        font: {
+          weight: 700;
+          size: 35px;
+        }
+        letter-spacing: 13px;
+        @include rtlStyle {
+          letter-spacing: 0;
+        }
       }
     }
     .add-todo {
@@ -41,8 +47,14 @@ main {
         background-color: transparent;
         margin-bottom: -3px;
         color: $main-text-color;
+        caret-color: $bright-blue;
         &::placeholder {
           color: $second-text-color;
+        }
+        @include rtlStyle {
+          &:placeholder-shown {
+            direction: rtl;
+          }
         }
       }
     }

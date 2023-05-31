@@ -2,10 +2,6 @@
 /* global */
 /* Light Theme */
 /* Dark Theme */
-/* colors */
-/* global */
-/* Light Theme */
-/* Dark Theme */
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -152,7 +148,7 @@ main {
   background-image: url(../images/bg-desktop-light.jpg);
   background-repeat: no-repeat;
   background-size: contain;
-  padding: 50px;
+  padding-top: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -170,18 +166,22 @@ main > section header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: hsl(0deg, 0%, 98%);
-  font-size: 35px;
+  font-size: 25px;
 }
 main > section header span {
   font-weight: 700;
-  letter-spacing: 10px;
+  font-size: 35px;
+  letter-spacing: 13px;
+}
+html[dir=rtl] main > section header span {
+  letter-spacing: 0;
 }
 main > section .add-todo {
   background-color: hsl(0deg, 0%, 98%);
@@ -206,6 +206,7 @@ main > section .add-todo input[type=text] {
   background-color: transparent;
   margin-bottom: -3px;
   color: hsl(235deg, 19%, 35%);
+  caret-color: hsl(220deg, 98%, 61%);
 }
 main > section .add-todo input[type=text]::-webkit-input-placeholder {
   color: hsl(236deg, 9%, 61%);
@@ -221,5 +222,14 @@ main > section .add-todo input[type=text]::-ms-input-placeholder {
 }
 main > section .add-todo input[type=text]::placeholder {
   color: hsl(236deg, 9%, 61%);
+}
+html[dir=rtl] main > section .add-todo input[type=text]:-moz-placeholder-shown {
+  direction: rtl;
+}
+html[dir=rtl] main > section .add-todo input[type=text]:-ms-input-placeholder {
+  direction: rtl;
+}
+html[dir=rtl] main > section .add-todo input[type=text]:placeholder-shown {
+  direction: rtl;
 }
 /*# sourceMappingURL=main.css.map */

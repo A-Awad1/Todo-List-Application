@@ -14,41 +14,35 @@ html(lang="en", dir=dir)
       href="../images/favicon-32x32.png"
     )
     title #{pageTitle}
-    block externalFiles
-      //- Font Awesome Library
-      link(rel="stylesheet", href="css/all.min.css")
-      //- Main Template CSS File
-      link(rel="stylesheet", href="css/main.css")
+    //- Font Awesome Library
+    link(rel="stylesheet", href="css/all.min.css")
+    //- Main Template CSS File
+    link(rel="stylesheet", href="css/main.css")
     //- Google Fonts
     link(rel="preconnect", href="https://fonts.googleapis.com")
     link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
     link(rel="stylesheet", id="font-url" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap")
   body
-    //- Start Page Content
-    block pageContent
-      main
-        section
-          header 
-            span #{appName}
-            i(class="fa-solid fa-moon")
-          .add-todo
-            .checkbox-container
-              input(type='checkbox')
-            input(type='text' , dir='auto' , placeholder=addPlaceHolder)
-          .all-todos
-          .control-filter
-            div.items-left
-              span 
-              span #{itemsLeft}
-            .filters 
-              each text,filter in filters ? filters : []
-                span(id=`filter-${filter}`) #{text}
-            span.removeAll #{removeAll}
-          .span #{reorderGuide}
-    //- End Page Content
-    //- Start External Script Files
+    main
+      section
+        header 
+          span #{appName}
+          i(class="fa-solid fa-moon")
+        .add-todo
+          .checkbox-container
+            input(type='checkbox')
+          input(type='text' , dir='auto' , placeholder=addPlaceHolder)
+        .all-todos
+        .control-filter
+          div.items-left
+            span 
+            span #{itemsLeft}
+          .filters 
+            each text,filter in filters ? filters : []
+              span(id=`filter-${filter}`) #{text}
+          span.removeAll #{removeAll}
+        .span #{reorderGuide}
     //- Font Awesome Library
     script(src="js/all.min.js")
     //- Main Template js File
     script(src="js/main.js")
-    //- End External Script Files
