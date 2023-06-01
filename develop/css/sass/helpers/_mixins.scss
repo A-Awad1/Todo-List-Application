@@ -16,6 +16,6 @@
   border: none;
   background-color: transparent;
   svg {
-    font-size: $svg-size;
+    font-size: $svg-size + px;
   }
 }

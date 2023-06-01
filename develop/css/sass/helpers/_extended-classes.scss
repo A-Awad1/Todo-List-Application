@@ -1,0 +1,5 @@
+.prevent-click {
+  color: $third-text-color;
+  user-select: none;
+  pointer-events: none;
+}

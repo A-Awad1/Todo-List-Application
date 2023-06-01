@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $main-background-color;
+  font-size: 25px;
+  span {
+    font: {
+      weight: 700;
+      size: 35px;
+    }
+    letter-spacing: 13px;
+    @include rtlStyle {
+      letter-spacing: 0;
+    }
+  }
+  > div {
+    display: flex;
+    gap: 15px;
+    svg {
+      cursor: pointer;
+    }
+  }
+}

@@ -27,21 +27,25 @@ html(lang="en", dir=dir)
       section
         header 
           span #{appName}
-          i(class="fa-solid fa-moon")
-        .add-todo
+          div
+            i(class="fa-solid fa-moon")
+            i(class="fa-solid fa-globe")
+        .add-task
           .checkbox-container
             input(type='checkbox')
           input(type='text' , dir='auto' , placeholder=addPlaceHolder)
-        .all-todos
-        .control-filter
-          div.items-left
-            span 
-            span #{itemsLeft}
-          .filters 
-            each text,filter in filters ? filters : []
-              span(id=`filter-${filter}`) #{text}
-          span.removeAll #{removeAll}
-        .span #{reorderGuide}
+          button.prevent-click
+            i(class="fa-solid fa-plus")
+        .all-tasks
+          .filters-control
+            div
+              span.items-left 
+              span  #{itemsLeft}
+            .filters 
+              each text,filter in filters ? filters : []
+                span(id=`filter-${filter}`) #{text}
+            span.removeAll #{removeAll}
+        .span.reorder-guide #{reorderGuide}
     //- Font Awesome Library
     script(src="js/all.min.js")
     //- Main Template js File

@@ -6,57 +6,20 @@ main {
     repeat: no-repeat;
     size: contain;
   }
+  @include underTablet {
+    background-image: url(../images/bg-mobile-light.jpg);
+  }
   padding-top: 80px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   > section {
     width: 500px;
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: $main-background-color;
-      font-size: 25px;
-      span {
-        font: {
-          weight: 700;
-          size: 35px;
-        }
-        letter-spacing: 13px;
-        @include rtlStyle {
-          letter-spacing: 0;
-        }
-      }
-    }
-    .add-todo {
-      background-color: $main-background-color;
-      border-radius: $main-border-radius;
-      margin: 30px 0 20px;
-      padding: 20px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      .checkbox-container {
-        pointer-events: none;
-      }
-      input[type="text"] {
-        width: 100%;
-        border: none;
-        background-color: transparent;
-        margin-bottom: -3px;
-        color: $main-text-color;
-        caret-color: $bright-blue;
-        &::placeholder {
-          color: $second-text-color;
-        }
-        @include rtlStyle {
-          &:placeholder-shown {
-            direction: rtl;
-          }
-        }
-      }
+    .reorder-guide {
+      color: $second-text-color;
+      font-size: 16px;
+      margin: 20px auto;
+      width: fit-content;
     }
   }
 }

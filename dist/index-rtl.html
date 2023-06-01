@@ -15,20 +15,24 @@
   <body>
     <main>
       <section>
-        <header> <span>قائمة المهام</span><i class="fa-solid fa-moon"></i></header>
-        <div class="add-todo">
+        <header> <span>قائمة المهام</span>
+          <div><i class="fa-solid fa-moon"></i><i class="fa-solid fa-globe"></i></div>
+        </header>
+        <div class="add-task">
           <div class="checkbox-container">
             <input type="checkbox">
           </div>
           <input type="text" dir="auto" placeholder="قم باضافة مهمة جديدة">
+          <button class="prevent-click"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div class="all-todos"></div>
-        <div class="control-filter">
-          <div class="items-left"><span> </span><span>المهام المتبقية</span></div>
-          <div class="filters"> <span id="filter-all">الكل</span><span id="filter-active">المتبقية</span><span id="filter-completed">المنتهية</span>
-          </div><span class="removeAll">ازالة المنتهية</span>
+        <div class="all-tasks">
+          <div class="filters-control">
+            <div><span class="items-left"> </span><span> المهام المتبقية</span></div>
+            <div class="filters"> <span id="filter-all">الكل</span><span id="filter-active">المتبقية</span><span id="filter-completed">المنتهية</span>
+            </div><span class="removeAll">ازالة المنتهية</span>
+          </div>
         </div>
-        <div class="span">قم بالسحب والإفلات لإعادة ترتيب القائمة</div>
+        <div class="span reorder-guide">قم بالسحب والإفلات لإعادة ترتيب القائمة</div>
       </section>
     </main>
     <script src="js/all.min.js"></script>

@@ -2,6 +2,37 @@
 /* global */
 /* Light Theme */
 /* Dark Theme */
+.all-tasks .task-box, .add-task {
+  padding: 20px;
+  min-height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 20px;
+}
+
+.filters-control .removeAll, .filters-control .filters span, .all-tasks .task-box .buttons-box button, .add-task > button {
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.filters-control .removeAll:hover, .filters-control .filters span:hover, .all-tasks .task-box .buttons-box button:hover, .add-task > button:hover {
+  color: hsl(235deg, 19%, 35%);
+}
+
+.prevent-click, .all-tasks .task-box.task-completed .task-content,
+.all-tasks .task-box.task-completed .edit-btn {
+  color: hsl(233deg, 11%, 84%);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  pointer-events: none;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -100,12 +131,47 @@ html {
   background-color: hsl(0deg, 0%, 98%);
 }
 
+main {
+  min-height: 100vh;
+  background-color: hsl(0deg, 0%, 98%);
+  background-image: url(../images/bg-desktop-light.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+@media (max-width: 768px) {
+  main {
+    background-image: url(../images/bg-mobile-light.jpg);
+  }
+}
+main > section {
+  width: 500px;
+}
+main > section .reorder-guide {
+  color: hsl(236deg, 9%, 61%);
+  font-size: 16px;
+  margin: 20px auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .checkbox-container {
   height: 20px;
   aspect-ratio: 1/1;
   border-radius: 50%;
   background-color: hsl(236deg, 33%, 92%);
   position: relative;
+  margin-top: -5px;
 }
 .checkbox-container input[type=checkbox] {
   -webkit-appearance: none;
@@ -142,27 +208,7 @@ html {
   pointer-events: none;
 }
 
-main {
-  min-height: 100vh;
-  background-color: hsl(0deg, 0%, 98%);
-  background-image: url(../images/bg-desktop-light.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding-top: 80px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-}
-main > section {
-  width: 500px;
-}
-main > section header {
+header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -175,61 +221,132 @@ main > section header {
   color: hsl(0deg, 0%, 98%);
   font-size: 25px;
 }
-main > section header span {
+header span {
   font-weight: 700;
   font-size: 35px;
   letter-spacing: 13px;
 }
-html[dir=rtl] main > section header span {
+html[dir=rtl] header span {
   letter-spacing: 0;
 }
-main > section .add-todo {
-  background-color: hsl(0deg, 0%, 98%);
-  border-radius: 4px;
-  margin: 30px 0 20px;
-  padding: 20px;
-  height: 55px;
+header > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
-main > section .add-todo .checkbox-container {
+header > div svg {
+  cursor: pointer;
+}
+
+.add-task {
+  background-color: hsl(0deg, 0%, 98%);
+  border-radius: 4px;
+  margin: 30px 0 20px;
+}
+.add-task > .checkbox-container {
   pointer-events: none;
 }
-main > section .add-todo input[type=text] {
+.add-task > input[type=text] {
   width: 100%;
   border: none;
   background-color: transparent;
-  margin-bottom: -3px;
   color: hsl(235deg, 19%, 35%);
   caret-color: hsl(220deg, 98%, 61%);
 }
-main > section .add-todo input[type=text]::-webkit-input-placeholder {
+.add-task > input[type=text]::-webkit-input-placeholder {
   color: hsl(236deg, 9%, 61%);
 }
-main > section .add-todo input[type=text]::-moz-placeholder {
+.add-task > input[type=text]::-moz-placeholder {
   color: hsl(236deg, 9%, 61%);
 }
-main > section .add-todo input[type=text]:-ms-input-placeholder {
+.add-task > input[type=text]:-ms-input-placeholder {
   color: hsl(236deg, 9%, 61%);
 }
-main > section .add-todo input[type=text]::-ms-input-placeholder {
+.add-task > input[type=text]::-ms-input-placeholder {
   color: hsl(236deg, 9%, 61%);
 }
-main > section .add-todo input[type=text]::placeholder {
+.add-task > input[type=text]::placeholder {
   color: hsl(236deg, 9%, 61%);
 }
-html[dir=rtl] main > section .add-todo input[type=text]:-moz-placeholder-shown {
+html[dir=rtl] .add-task > input[type=text]:-moz-placeholder-shown {
   direction: rtl;
 }
-html[dir=rtl] main > section .add-todo input[type=text]:-ms-input-placeholder {
+html[dir=rtl] .add-task > input[type=text]:-ms-input-placeholder {
   direction: rtl;
 }
-html[dir=rtl] main > section .add-todo input[type=text]:placeholder-shown {
+html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
   direction: rtl;
+}
+.add-task > button {
+  border: none;
+  background-color: transparent;
+  color: hsl(236deg, 9%, 61%);
+}
+.add-task > button svg {
+  font-size: 20px;
+}
+
+.all-tasks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: hsl(0deg, 0%, 98%);
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 10px -5px hsl(236deg, 9%, 61%);
+          box-shadow: 0px 0px 10px -5px hsl(236deg, 9%, 61%);
+}
+.all-tasks .task-box {
+  border-bottom: 1px solid hsl(236deg, 33%, 92%);
+}
+.all-tasks .task-box.task-completed .task-content,
+.all-tasks .task-box.task-completed .edit-btn {
+  text-decoration: line-through;
+}
+.all-tasks .task-box .buttons-box {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.all-tasks .task-box .buttons-box button {
+  border: none;
+  background-color: transparent;
+}
+.all-tasks .task-box .buttons-box button svg {
+  font-size: 20px;
+}
+.all-tasks .task-box .buttons-box button.edit-btn {
+  margin-right: 10px;
+}
+
+.filters-control {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: hsl(236deg, 9%, 61%);
+  font-size: 14px;
+  font-weight: 700;
+}
+.filters-control .filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.filters-control .filters span {
+  text-transform: capitalize;
+}
+.filters-control .filters span.selected, .filters-control .filters span.selected:hover {
+  color: hsl(220deg, 98%, 61%);
 }
 /*# sourceMappingURL=main.css.map */
