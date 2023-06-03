@@ -7,6 +7,7 @@
   margin-top: -5px;
   $checkbox: 'input[type= "checkbox"]';
   #{$checkbox} {
+    cursor: pointer;
     appearance: none;
     height: 100%;
     width: 100%;

@@ -206,6 +206,7 @@ button > svg {
   margin-top: -5px;
 }
 .checkbox-container input[type=checkbox] {
+  cursor: pointer;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
