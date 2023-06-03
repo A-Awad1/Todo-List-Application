@@ -1,0 +1,26 @@
+.filters {
+  @extend %center-flex;
+  gap: 20px;
+
+  @include underTablet {
+    margin: 20px 0 40px;
+    padding: 15px;
+    background-color: $main-background-color;
+    border-radius: $main-border-radius;
+    box-shadow: $main-box-shadow;
+  }
+  @include aboveTablet {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -34px);
+    font-size: 14px;
+  }
+  button {
+    font-weight: 700;
+    &.selected,
+    &.selected:hover {
+      color: $bright-blue;
+    }
+    transition: color $main-transition;
+  }
+}

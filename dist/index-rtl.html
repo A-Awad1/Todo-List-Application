@@ -23,14 +23,18 @@
             <input type="checkbox">
           </div>
           <input type="text" dir="auto" placeholder="قم باضافة مهمة جديدة">
-          <button class="prevent-click"><i class="fa-solid fa-plus"></i></button>
+          <button disabled><i class="fa-solid fa-plus"></i></button>
         </div>
         <div class="all-tasks">
-          <div class="filters-control">
-            <div><span class="items-left"> </span><span> المهام المتبقية</span></div>
-            <div class="filters"> <span id="filter-all">الكل</span><span id="filter-active">المتبقية</span><span id="filter-completed">المنتهية</span>
-            </div><span class="removeAll">ازالة المنتهية</span>
+          <div class="list-footer">
+            <div><span class="items-left"> </span><span> مهام متبقية</span></div>
+            <button class="removeAll button-text">ازالة المهام المنتهية</button>
           </div>
+        </div>
+        <div class="filters"> 
+          <button class="button-text" id="filter-all">الكل</button>
+          <button class="button-text" id="filter-active">المتبقية</button>
+          <button class="button-text" id="filter-completed">المنتهية</button>
         </div>
         <div class="span reorder-guide">قم بالسحب والإفلات لإعادة ترتيب القائمة</div>
       </section>

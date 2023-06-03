@@ -1,0 +1,10 @@
+.list-footer {
+  order: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  white-space: nowrap;
+  color: $second-text-color;
+  font-size: 14px;
+}

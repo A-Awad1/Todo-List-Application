@@ -27,9 +27,9 @@ optgroup {
     family: inherit;
   }
   color: inherit;
-  &:not(input[type="text"], input[type="password"], input[type="email"]) {
-    cursor: pointer;
-  }
+}
+html {
+  min-width: fit-content;
 }
 body {
   font: {
@@ -37,5 +37,17 @@ body {
     weight: 400;
     size: 18px;
   }
-  color: $main-text-color;
+  background: {
+    color: $main-background-color;
+    image: url(../images/bg-desktop-light.jpg);
+    repeat: no-repeat;
+    size: 100% 250px;
+  }
+  @include underTablet {
+    background-image: url(../images/bg-mobile-light.jpg);
+    font-size: 16px;
+  }
+  @include underLargeMobile {
+    background-size: auto 250px;
+  }
 }

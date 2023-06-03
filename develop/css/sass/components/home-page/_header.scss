@@ -10,6 +10,10 @@ header {
       size: 35px;
     }
     letter-spacing: 13px;
+    margin-bottom: -5px;
+    @include underTablet {
+      font-size: 30px;
+    }
     @include rtlStyle {
       letter-spacing: 0;
     }

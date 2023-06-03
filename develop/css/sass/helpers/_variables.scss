@@ -1,5 +1,5 @@
 $Awesome: "Font Awesome 6 Free";
-$main-transition: 0.3s; 
+$main-transition: 0.3s;
 $second-transition: 0.5s;
 $main-border-radius: 4px;
 $main-padding: 20px;
@@ -32,3 +32,5 @@ $main-border-color: hsl(236, 33%, 92%); // Very Light Grayish Blue
   $third-text-color: hsl(233, 14%, 35%); // Very Dark Grayish Blue
   $main-border-color: hsl(234, 11%, 52%); // Dark Grayish Blue
 }
+
+$main-box-shadow: 0px 0px 10px -5px $second-text-color;

@@ -23,14 +23,18 @@
             <input type="checkbox">
           </div>
           <input type="text" dir="auto" placeholder="Create a new todo...">
-          <button class="prevent-click"><i class="fa-solid fa-plus"></i></button>
+          <button disabled><i class="fa-solid fa-plus"></i></button>
         </div>
         <div class="all-tasks">
-          <div class="filters-control">
+          <div class="list-footer">
             <div><span class="items-left"> </span><span> items left</span></div>
-            <div class="filters"> <span id="filter-all">all</span><span id="filter-active">active</span><span id="filter-completed">completed</span>
-            </div><span class="removeAll">Clear Completed</span>
+            <button class="removeAll button-text">Clear Completed</button>
           </div>
+        </div>
+        <div class="filters"> 
+          <button class="button-text" id="filter-all">all</button>
+          <button class="button-text" id="filter-active">active</button>
+          <button class="button-text" id="filter-completed">completed</button>
         </div>
         <div class="span reorder-guide">Drag and drop to reorder list</div>
       </section>

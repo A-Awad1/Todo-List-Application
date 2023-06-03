@@ -4,11 +4,7 @@ let itemsLeft = document.querySelector(".items-left");
 let addInput = document.querySelector(".add-task>input");
 let addButton = document.querySelector(".add-task>button");
 
-addInput.oninput = (v) => {
-  !v.target.value.trim()
-    ? addButton.classList.add("prevent-click")
-    : addButton.classList.remove("prevent-click");
-};
+addInput.oninput = () => (addButton.disabled = !addInput.value.trim());
 
 fetch("http://localhost:3000/tasks")
   .then((resolve) => resolve.json())
@@ -44,6 +40,7 @@ fetch("http://localhost:3000/tasks")
       // check task completed
       if (e.completed) {
         taskBox.classList.add("task-completed");
+        editTask.disabled = true;
         taskCheckBox.checked = true;
       }
     });

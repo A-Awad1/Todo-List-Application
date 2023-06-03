@@ -5,15 +5,9 @@
   align-items: center;
   gap: 20px;
 }
-%clickableItem {
-  cursor: pointer;
-  transition: $main-transition;
-  &:hover {
-    color: $main-text-color;
-  }
-}
 %center-flex {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+

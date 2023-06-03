@@ -4,7 +4,6 @@
 @import "sass/helpers/mixins";
 @import "sass/helpers/functions";
 @import "sass/helpers/placeholders";
-@import "sass/helpers/extended-classes";
 // layout
 @import "sass/layout/global-rules";
 @import "sass/layout/grid";
@@ -12,8 +11,10 @@
 // pages
 @import "sass/pages/home";
 // components
+@import "sass/components/global/buttons";
 @import "sass/components/global/checkboxContainer";
 @import "sass/components/home-page/header";
 @import "sass/components/home-page/addTask";
 @import "sass/components/home-page/allTasks";
-@import "sass/components/home-page/filtersAndControlSection";
+@import "sass/components/home-page/listFooter";
+@import "sass/components/home-page/filters";

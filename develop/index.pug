@@ -34,17 +34,17 @@ html(lang="en", dir=dir)
           .checkbox-container
             input(type='checkbox')
           input(type='text' , dir='auto' , placeholder=addPlaceHolder)
-          button.prevent-click
+          button(disabled)
             i(class="fa-solid fa-plus")
         .all-tasks
-          .filters-control
+          .list-footer
             div
               span.items-left 
               span  #{itemsLeft}
-            .filters 
-              each text,filter in filters ? filters : []
-                span(id=`filter-${filter}`) #{text}
-            span.removeAll #{removeAll}
+            button.removeAll.button-text #{removeAll}
+        .filters 
+          each text,filter in filters ? filters : []
+            button.button-text(id=`filter-${filter}`) #{text}
         .span.reorder-guide #{reorderGuide}
     //- Font Awesome Library
     script(src="js/all.min.js")

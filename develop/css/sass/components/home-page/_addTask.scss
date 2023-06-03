@@ -2,6 +2,7 @@
   background-color: $main-background-color;
   border-radius: $main-border-radius;
   margin: 30px 0 20px;
+  min-width: 300px;
   @extend %mainTaskBox;
   > {
     .checkbox-container {
@@ -21,11 +22,6 @@
           direction: rtl;
         }
       }
-    }
-    button {
-      @extend %clickableItem;
-      @include iconWithinButton(20);
-      color: $second-text-color;
     }
   }
 }

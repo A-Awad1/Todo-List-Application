@@ -1,20 +1,17 @@
 main {
-  min-height: 100vh;
-  background: {
-    color: $main-background-color;
-    image: url(../images/bg-desktop-light.jpg);
-    repeat: no-repeat;
-    size: contain;
-  }
-  @include underTablet {
-    background-image: url(../images/bg-mobile-light.jpg);
-  }
-  padding-top: 80px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  color: $main-text-color;
+  min-height: 100vh;
+  padding: 75px 20px 0;
+  @include underTablet {
+    padding-top: 60px;
+  }
   > section {
-    width: 500px;
+    @include aboveTablet {
+      width: 500px;
+    }
+    position: relative;
     .reorder-guide {
       color: $second-text-color;
       font-size: 16px;

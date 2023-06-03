@@ -1,0 +1,23 @@
+button {
+  background-color: transparent;
+  border: none;
+  transition: $main-transition;
+  color: $second-text-color;
+  cursor: pointer;
+  &.button-text {
+    text-transform: capitalize;
+    &:hover {
+      color: $main-text-color;
+    }
+  }
+  &:disabled {
+    color: $third-text-color;
+    cursor: not-allowed;
+  }
+  > svg {
+    font-size: 20px;
+    @include underTablet {
+      font-size: 18px;
+    }
+  }
+}

@@ -14,23 +14,16 @@
   gap: 20px;
 }
 
-.filters-control .removeAll, .filters-control .filters span, .all-tasks .task-box .buttons-box button, .add-task > button {
-  cursor: pointer;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
-.filters-control .removeAll:hover, .filters-control .filters span:hover, .all-tasks .task-box .buttons-box button:hover, .add-task > button:hover {
-  color: hsl(235deg, 19%, 35%);
-}
-
-.prevent-click, .all-tasks .task-box.task-completed .task-content,
-.all-tasks .task-box.task-completed .edit-btn {
-  color: hsl(233deg, 11%, 84%);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  pointer-events: none;
+.filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 * {
@@ -69,19 +62,32 @@ optgroup {
   font-family: inherit;
   color: inherit;
 }
-input:not(input[type=text], input[type=password], input[type=email]),
-select:not(input[type=text], input[type=password], input[type=email]),
-textarea:not(input[type=text], input[type=password], input[type=email]),
-button:not(input[type=text], input[type=password], input[type=email]),
-optgroup:not(input[type=text], input[type=password], input[type=email]) {
-  cursor: pointer;
+
+html {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 
 body {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 400;
   font-size: 18px;
-  color: hsl(235deg, 19%, 35%);
+  background-color: hsl(0deg, 0%, 98%);
+  background-image: url(../images/bg-desktop-light.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 250px;
+}
+@media (max-width: 768px) {
+  body {
+    background-image: url(../images/bg-mobile-light.jpg);
+    font-size: 16px;
+  }
+}
+@media (max-width: 375px) {
+  body {
+    background-size: auto 250px;
+  }
 }
 
 .container {
@@ -132,29 +138,28 @@ html {
 }
 
 main {
-  min-height: 100vh;
-  background-color: hsl(0deg, 0%, 98%);
-  background-image: url(../images/bg-desktop-light.jpg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding-top: 80px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  color: hsl(235deg, 19%, 35%);
+  min-height: 100vh;
+  padding: 75px 20px 0;
 }
 @media (max-width: 768px) {
   main {
-    background-image: url(../images/bg-mobile-light.jpg);
+    padding-top: 60px;
   }
 }
 main > section {
-  width: 500px;
+  position: relative;
+}
+@media (min-width: 768.1px) {
+  main > section {
+    width: 500px;
+  }
 }
 main > section .reorder-guide {
   color: hsl(236deg, 9%, 61%);
@@ -163,6 +168,33 @@ main > section .reorder-guide {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  color: hsl(236deg, 9%, 61%);
+  cursor: pointer;
+}
+button.button-text {
+  text-transform: capitalize;
+}
+button.button-text:hover {
+  color: hsl(235deg, 19%, 35%);
+}
+button:disabled {
+  color: hsl(233deg, 11%, 84%);
+  cursor: not-allowed;
+}
+button > svg {
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  button > svg {
+    font-size: 18px;
+  }
 }
 
 .checkbox-container {
@@ -225,6 +257,12 @@ header span {
   font-weight: 700;
   font-size: 35px;
   letter-spacing: 13px;
+  margin-bottom: -5px;
+}
+@media (max-width: 768px) {
+  header span {
+    font-size: 30px;
+  }
 }
 html[dir=rtl] header span {
   letter-spacing: 0;
@@ -243,6 +281,7 @@ header > div svg {
   background-color: hsl(0deg, 0%, 98%);
   border-radius: 4px;
   margin: 30px 0 20px;
+  min-width: 300px;
 }
 .add-task > .checkbox-container {
   pointer-events: none;
@@ -278,14 +317,6 @@ html[dir=rtl] .add-task > input[type=text]:-ms-input-placeholder {
 html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
   direction: rtl;
 }
-.add-task > button {
-  border: none;
-  background-color: transparent;
-  color: hsl(236deg, 9%, 61%);
-}
-.add-task > button svg {
-  font-size: 20px;
-}
 
 .all-tasks {
   display: -webkit-box;
@@ -303,26 +334,25 @@ html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
 .all-tasks .task-box {
   border-bottom: 1px solid hsl(236deg, 33%, 92%);
 }
-.all-tasks .task-box.task-completed .task-content,
-.all-tasks .task-box.task-completed .edit-btn {
+.all-tasks .task-box.task-completed > .task-content {
   text-decoration: line-through;
+  color: hsl(233deg, 11%, 84%);
 }
 .all-tasks .task-box .buttons-box {
   margin-left: auto;
   white-space: nowrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
 }
-.all-tasks .task-box .buttons-box button {
-  border: none;
-  background-color: transparent;
-}
-.all-tasks .task-box .buttons-box button svg {
-  font-size: 20px;
-}
-.all-tasks .task-box .buttons-box button.edit-btn {
-  margin-right: 10px;
+html[dir=rtl] .all-tasks .task-box .buttons-box {
+  margin: 0;
+  margin-left: 0;
+  margin-right: auto;
 }
 
-.filters-control {
+.list-footer {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;
           order: 1;
@@ -333,20 +363,40 @@ html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  gap: 20px;
+  white-space: nowrap;
   color: hsl(236deg, 9%, 61%);
   font-size: 14px;
+}
+
+.filters {
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .filters {
+    margin: 20px 0 40px;
+    padding: 15px;
+    background-color: hsl(0deg, 0%, 98%);
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 0px 10px -5px hsl(236deg, 9%, 61%);
+            box-shadow: 0px 0px 10px -5px hsl(236deg, 9%, 61%);
+  }
+}
+@media (min-width: 768.1px) {
+  .filters {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, -34px);
+            transform: translate(-50%, -34px);
+    font-size: 14px;
+  }
+}
+.filters button {
   font-weight: 700;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
-.filters-control .filters {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 10px;
-}
-.filters-control .filters span {
-  text-transform: capitalize;
-}
-.filters-control .filters span.selected, .filters-control .filters span.selected:hover {
+.filters button.selected, .filters button.selected:hover {
   color: hsl(220deg, 98%, 61%);
 }
 /*# sourceMappingURL=main.css.map */
