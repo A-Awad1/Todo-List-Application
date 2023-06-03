@@ -258,7 +258,6 @@ header span {
   font-weight: 700;
   font-size: 35px;
   letter-spacing: 13px;
-  margin-bottom: -5px;
 }
 @media (max-width: 768px) {
   header span {
@@ -274,8 +273,9 @@ header > div {
   display: flex;
   gap: 15px;
 }
-header > div svg {
-  cursor: pointer;
+header > div button svg {
+  color: hsl(0deg, 0%, 98%);
+  font-size: 25px;
 }
 
 .add-task {

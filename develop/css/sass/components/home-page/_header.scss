@@ -10,7 +10,6 @@ header {
       size: 35px;
     }
     letter-spacing: 13px;
-    margin-bottom: -5px;
     @include underTablet {
       font-size: 30px;
     }
@@ -21,8 +20,11 @@ header {
   > div {
     display: flex;
     gap: 15px;
-    svg {
-      cursor: pointer;
+    button {
+      svg {
+        color: $main-background-color;
+        font-size: 25px;
+      }
     }
   }
 }

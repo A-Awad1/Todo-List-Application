@@ -1,8 +1,21 @@
+let rootElement = document.documentElement;
+let langButton = document.querySelector(".lang-button");
+let modeButton = document.querySelector(".mode-button");
 let allTasks = document.querySelector(".all-tasks");
 let itemsLeft = document.querySelector(".items-left");
-
 let addInput = document.querySelector(".add-task>input");
 let addButton = document.querySelector(".add-task>button");
+
+langButton.onclick = () =>
+  location.replace(rootElement.dir === "ltr" ? "index-rtl.html" : ".");
+
+modeButton.onclick = () => {
+  if (!rootElement.getAttribute("dark-mode")) {
+    rootElement.setAttribute("dark-mode", true);
+  } else {
+    rootElement.removeAttribute("dark-mode");
+  }
+};
 
 addInput.oninput = () => (addButton.disabled = !addInput.value.trim());
 
