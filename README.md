@@ -1,6 +1,6 @@
 # Todo Application
 
-**Project Progress : ![55%](https://progress-bar.dev/55/?title=done)**
+**Project Progress : ![60%](https://progress-bar.dev/60/?title=done)**
 
 <!-- **[See Website Live]()** -->
 
@@ -11,14 +11,14 @@ This project is responsive in all devices.
 Features:
 
 - Multilingual application that contains both English and Arabic languages and can switch between them
-- Contains full CRUD operations for todos
-- Add new todos to the list
-- update todos on the list
-- Delete todos from the list
-- Mark todos as complete
-- Clear all completed todos
+- Contains full CRUD operations for tasks
+- Add new task to the list
+- update task on the list
+- Delete task from the list
+- Mark task as complete
+- Clear all completed tasks
 - Drag and drop to reorder items on the list
-- Filter by all/active/complete todos
+- Filter by all/active/complete tasks
 - Toggle light and dark mode
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
