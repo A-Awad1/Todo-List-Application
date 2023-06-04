@@ -6,19 +6,28 @@ let itemsLeft = document.querySelector(".items-left");
 let addInput = document.querySelector(".add-task>input");
 let addButton = document.querySelector(".add-task>button");
 
+// language convert
 langButton.onclick = () =>
   location.replace(rootElement.dir === "ltr" ? "index-rtl.html" : ".");
 
-modeButton.onclick = () => {
-  if (!rootElement.getAttribute("dark-mode")) {
-    rootElement.setAttribute("dark-mode", true);
-  } else {
-    rootElement.removeAttribute("dark-mode");
-  }
+// mode convert
+lightMode = () => {
+  rootElement.removeAttribute("dark-mode");
+  localStorage.removeItem("darkMode");
+  modeButton.innerHTML = '<i class="fa-solid fa-moon">';
 };
+darkMode = () => {
+  rootElement.setAttribute("dark-mode", true);
+  localStorage.setItem("darkMode", true);
+  modeButton.innerHTML = '<i class="fa-solid fa-sun">';
+};
+localStorage.darkMode ? darkMode() : lightMode();
+modeButton.onclick = () => (localStorage.darkMode ? lightMode() : darkMode());
 
+// add task button
 addInput.oninput = () => (addButton.disabled = !addInput.value.trim());
 
+// get all tasks from api
 fetch("http://localhost:3000/tasks")
   .then((resolve) => resolve.json())
   .then((resolve) => {

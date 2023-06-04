@@ -2,7 +2,7 @@
   height: 20px;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background-color: $main-border-color;
+  background-color: var(--main-border-color);
   position: relative;
   margin-top: -5px;
   $checkbox: 'input[type= "checkbox"]';
@@ -13,15 +13,23 @@
     width: 100%;
     border-radius: 50%;
     transform: scale(0.9);
-    background-color: $main-background-color;
+    background-color: var(--main-background-color);
     transition: $main-transition;
     &:checked {
       transform: scale(1);
-      background-image: linear-gradient(130deg, $sky-color, $pink-color);
+      background-image: linear-gradient(
+        130deg,
+        var(--sky-color),
+        var(--pink-color)
+      );
     }
   }
   &:has(#{$checkbox}:hover) {
-    background-image: linear-gradient(130deg, $sky-color, $pink-color);
+    background-image: linear-gradient(
+      130deg,
+      var(--sky-color),
+      var(--pink-color)
+    );
   }
   &:has(#{$checkbox}:checked) {
     &::after {
@@ -31,7 +39,7 @@
         weight: 700;
         size: 10px;
       }
-      color: $main-background-color;
+      color: #fff;
       position: absolute;
       left: 50%;
       top: 50%;

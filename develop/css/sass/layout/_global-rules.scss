@@ -38,7 +38,7 @@ body {
     size: 18px;
   }
   background: {
-    color: $main-background-color;
+    color: var(--page-background-color);
     image: url(../images/bg-desktop-light.jpg);
     repeat: no-repeat;
     size: 100% 250px;
@@ -49,5 +49,11 @@ body {
   }
   @include underLargeMobile {
     background-size: auto 250px;
+  }
+  html[Dark-mode="true"] & {
+    background-image: url(../images/bg-desktop-dark.jpg);
+    @include underTablet {
+      background-image: url(../images/bg-mobile-dark.jpg);
+    }
   }
 }

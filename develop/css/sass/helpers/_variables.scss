@@ -1,36 +1,38 @@
+/* Global Variables */
 $Awesome: "Font Awesome 6 Free";
 $main-transition: 0.3s;
 $second-transition: 0.5s;
 $main-border-radius: 4px;
 $main-padding: 20px;
 $nav-width: 220px;
+$main-box-shadow: 0px 0px 10px -5px var(--second-text-color);
 
-$mode: "light";
-
-/* colors */
+/* Colors */
 
 /* global */
-$bright-blue: hsl(220, 98%, 61%);
-$sky-color: hsl(192, 100%, 67%);
-$pink-color: hsl(280, 87%, 65%);
-
-/* Light Theme */
-$main-background-color: hsl(0, 0%, 98%); // Very Light Gray
-$main-text-color: hsl(235, 19%, 35%); // Very Dark Grayish Blue
-$second-text-color: hsl(236, 9%, 61%); // Dark Grayish Blue
-$third-text-color: hsl(233, 11%, 84%); // Light Grayish Blue
-$main-border-color: hsl(236, 33%, 92%); // Very Light Grayish Blue
-
-/* Dark Theme */
-
-@if ($mode == "dark") {
-  $main-background-color: hsl(235, 21%, 11%); // Very Dark Blue
-  $second-background-color: hsl(235, 24%, 19%); // Very Dark Desaturated Blue
-  $main-text-color: hsl(234, 39%, 85%); // Light Grayish Blue
-  $main-hover-color: hsl(236, 33%, 92%); // Light Grayish Blue (hover)
-  $second-text-color: hsl(237, 14%, 26%); // Very Dark Grayish Blue
-  $third-text-color: hsl(233, 14%, 35%); // Very Dark Grayish Blue
-  $main-border-color: hsl(234, 11%, 52%); // Dark Grayish Blue
+html {
+  --bright-blue: hsl(220, 98%, 61%);
+  --sky-color: hsl(192, 100%, 67%);
+  --pink-color: hsl(280, 87%, 65%);
+  --white-color: hsl(0, 0%, 100%);
 }
-
-$main-box-shadow: 0px 0px 10px -5px $second-text-color;
+// light mode
+html:not([dark-mode="true"]) {
+  --page-background-color: hsl(0, 0%, 98%); // Very Dark Desaturated Blue
+  --main-background-color: hsl(0, 0%, 98%); // Very Dark Desaturated Blue
+  --main-text-color: hsl(235, 19%, 35%); // Very Dark Grayish Blue
+  --second-text-color: hsl(236, 9%, 61%); // Dark Grayish Blue
+  --third-text-color: hsl(233, 11%, 84%); // Light Grayish Blue
+  --main-border-color: hsl(236, 33%, 92%); // Very Light Grayish Blue
+  --main-hover-color: hsl(235, 19%, 35%); // Very Dark Grayish Blue
+}
+// dark mode
+html[Dark-mode="true"] {
+  --page-background-color: hsl(235, 21%, 11%); // Very Dark Blue
+  --main-background-color: hsl(235, 24%, 19%); // Very Dark Desaturated Blue
+  --main-text-color: hsl(234, 39%, 85%); // Light Grayish Blue
+  --second-text-color: hsl(233, 14%, 35%); // Dark Grayish Blue
+  --third-text-color: hsl(240, 9%, 28%); // Very Dark Grayish Blue
+  --main-border-color: hsl(237, 14%, 26%); // Very Dark Grayish Blue  
+  --main-hover-color: hsl(236, 33%, 92%); // Light Grayish Blue (hover)
+}

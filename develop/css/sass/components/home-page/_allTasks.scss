@@ -1,15 +1,15 @@
 .all-tasks {
   display: flex;
   flex-direction: column;
-  background-color: $main-background-color;
+  background-color: var(--main-background-color);
   border-radius: $main-border-radius;
   box-shadow: $main-box-shadow;
   .task-box {
     @extend %mainTaskBox;
-    border-bottom: 1px solid $main-border-color;
+    border-bottom: 1px solid var(--main-border-color);
     &.task-completed > .task-content {
       text-decoration: line-through;
-      color: $third-text-color;
+      color: var(--third-text-color);
     }
     .buttons-box {
       margin-left: auto;

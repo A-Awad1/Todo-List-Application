@@ -1,18 +1,19 @@
 html {
   scroll-behavior: smooth;
 }
-$scroll : "::-webkit-scrollbar";
+$scroll: "::-webkit-scrollbar";
 
-#{$scroll}{
+#{$scroll} {
   width: 15px;
 }
-#{$scroll}-track{
-  background-color: $main-text-color;
+#{$scroll}-track {
+  background-color: var(--main-text-color);
 }
-#{$scroll}-thumb{
+#{$scroll}-thumb {
   cursor: pointer;
-  border-radius:$main-border-radius;
-  & , &:hover{
-    background-color: $main-background-color;
+  border-radius: $main-border-radius;
+  &,
+  &:hover {
+    background-color: var(--main-background-color);
   }
 }

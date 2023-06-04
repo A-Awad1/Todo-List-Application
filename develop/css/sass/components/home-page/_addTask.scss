@@ -1,5 +1,5 @@
 .add-task {
-  background-color: $main-background-color;
+  background-color: var(--main-background-color);
   border-radius: $main-border-radius;
   margin: 30px 0 20px;
   min-width: 300px;
@@ -12,10 +12,10 @@
       width: 100%;
       border: none;
       background-color: transparent;
-      color: $main-text-color;
-      caret-color: $bright-blue;
+      color: var(--main-text-color);
+      caret-color: var(--bright-blue);
       &::placeholder {
-        color: $second-text-color;
+        color: var(--second-text-color);
       }
       @include rtlStyle {
         &:placeholder-shown {

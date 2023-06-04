@@ -5,7 +5,7 @@
   @include underTablet {
     margin: 20px 0 40px;
     padding: 15px;
-    background-color: $main-background-color;
+    background-color: var(--main-background-color);
     border-radius: $main-border-radius;
     box-shadow: $main-box-shadow;
   }
@@ -19,7 +19,7 @@
     font-weight: 700;
     &.selected,
     &.selected:hover {
-      color: $bright-blue;
+      color: var(--bright-blue);
     }
     transition: color $main-transition;
   }
