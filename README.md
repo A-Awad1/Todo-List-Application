@@ -25,11 +25,9 @@ Features:
 
 Technologies Used:
 
-- HTML
-- CSS
-- JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
-- SCSS
 - Pug
+- SCSS
+- JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
 - Gulp
 - Font Awesome Library
 
