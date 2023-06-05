@@ -4,6 +4,7 @@ main {
   color: var(--main-text-color);
   min-height: 100vh;
   padding: 65px 20px 0;
+  user-select: none;
   @include underTablet {
     padding-top: 60px;
   }
