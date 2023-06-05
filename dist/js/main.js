@@ -1,3 +1,4 @@
+let mainAPI = "http://localhost:3000/tasks/";
 let rootElement = document.documentElement;
 let langButton = document.querySelector(".lang-button");
 let modeButton = document.querySelector(".mode-button");
@@ -41,7 +42,6 @@ let updateSelectedFilter = () => {
     .filter((e) => e.dataset.filter === targetFilter)[0]
     .classList.add("selected");
 };
-updateSelectedFilter();
 filterButtons.forEach((e) => {
   e.onclick = (e) => {
     targetFilter = e.target.dataset.filter;
@@ -51,8 +51,8 @@ filterButtons.forEach((e) => {
 });
 
 // get all tasks from api
-function getTasks() {
-  fetch("http://localhost:3000/tasks")
+async function getTasks() {
+  return await fetch(mainAPI)
     .then((resolve) => resolve.json())
     .then((resolve) => {
       itemsLeft.textContent = resolve.filter((e) => !e.completed).length;
@@ -67,12 +67,24 @@ function getTasks() {
         // main task container box
         let taskBox = document.createElement("div");
         taskBox.classList.add("task-box");
+        taskBox.dataset.taskId = e.id;
         allTasks.appendChild(taskBox);
         // task checkbox
         let checkboxContainer = document.createElement("div");
         checkboxContainer.className = "checkbox-container";
         let taskCheckBox = document.createElement("input");
         taskCheckBox.type = "checkbox";
+        taskCheckBox.onclick = (event) => {
+          fetch(mainAPI + e.id, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              completed: event.target.checked,
+            }),
+          }).then(() => getTasks());
+        };
         checkboxContainer.appendChild(taskCheckBox);
         taskBox.appendChild(checkboxContainer);
         // task content
@@ -89,6 +101,11 @@ function getTasks() {
         let deleteTask = document.createElement("button");
         deleteTask.className = "delete-btn";
         deleteTask.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+        deleteTask.onclick = () => {
+          fetch(mainAPI + e.id, {
+            method: "DELETE",
+          }).then(() => getTasks());
+        };
         [editTask, deleteTask].forEach((e) => buttonsBox.appendChild(e));
         taskBox.appendChild(buttonsBox);
         // check task completed
@@ -101,4 +118,23 @@ function getTasks() {
       return resolve;
     });
 }
+updateSelectedFilter();
 getTasks();
+
+document.querySelectorAll(".all-tasks input[type='checkbox']").forEach(
+  (e) =>
+    (e.onclick = (e) => {
+      fetch(mainAPI + e.target.parentElement.parentElement.dataset.taskId, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: "NNNNNNNNNN",
+          completed: true,
+        }),
+      })
+        .then(() => console.log("done"))
+        .then(() => getTasks());
+    })
+);
