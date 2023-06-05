@@ -5,9 +5,13 @@ let modeButton = document.querySelector(".mode-button");
 let addInput = document.querySelector(".add-task>input");
 let addButton = document.querySelector(".add-task>button");
 let allTasks = document.querySelector(".all-tasks");
+let listFooter = document.querySelector(".list-footer");
+let filtersBox = document.querySelector(".filters");
 let itemsLeft = document.querySelector(".items-left");
 let clearCompleted = document.querySelector(".clear-completed");
 let filterButtons = document.querySelectorAll(".filters>button");
+let reorderGuide = document.querySelector(".reorder-guide");
+let newId;
 
 // language convert
 langButton.onclick = () =>
@@ -57,6 +61,12 @@ async function getTasks() {
     .then((resolve) => resolve.json())
     // ItemsLeft Number
     .then((resolve) => {
+      newId = Math.max(...resolve.map((e) => e.id)) + 1;
+      !resolve.length
+        ? [listFooter, filtersBox, reorderGuide].forEach(
+            (e) => (e.style.display = "none")
+          )
+        : null;
       itemsLeft.textContent = resolve.filter((e) => !e.completed).length;
       [...document.getElementsByClassName("task-box")].forEach((e) =>
         e.remove()
@@ -74,6 +84,7 @@ async function getTasks() {
     })
     .then((resolve) => filters[targetFilter](resolve))
     .then((resolve) => {
+      reorderGuide.style.display = !resolve.length ? "none" : "block";
       resolve.forEach((e) => {
         // main task container box
         let taskBox = document.createElement("div");
@@ -131,3 +142,26 @@ async function getTasks() {
 }
 updateSelectedFilter();
 getTasks();
+
+// add task to api
+async function addTask() {
+  return await fetch(mainAPI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id: newId,
+      content: addInput.value,
+      completed: false,
+    }),
+  }).then(() => {
+    addInput.value = "";
+    addButton.disabled = true;
+    getTasks();
+  });
+}
+
+addButton.onclick = () => addTask();
+addInput.onkeypress = (event) =>
+  event.key === "Enter" && event.target.value.trim() ? addTask() : null;
