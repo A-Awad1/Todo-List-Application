@@ -1,6 +1,6 @@
 # Todo Application
 
-**Project Progress : ![60%](https://progress-bar.dev/60/?title=done)**
+**Project Progress : ![65%](https://progress-bar.dev/65/?title=done)**
 
 <!-- **[See Website Live]()** -->
 
