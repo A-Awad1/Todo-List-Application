@@ -6,6 +6,7 @@ let addInput = document.querySelector(".add-task>input");
 let addButton = document.querySelector(".add-task>button");
 let allTasks = document.querySelector(".all-tasks");
 let itemsLeft = document.querySelector(".items-left");
+let clearCompleted = document.querySelector(".clear-completed");
 let filterButtons = document.querySelectorAll(".filters>button");
 
 // language convert
@@ -54,11 +55,21 @@ filterButtons.forEach((e) => {
 async function getTasks() {
   return await fetch(mainAPI)
     .then((resolve) => resolve.json())
+    // ItemsLeft Number
     .then((resolve) => {
       itemsLeft.textContent = resolve.filter((e) => !e.completed).length;
       [...document.getElementsByClassName("task-box")].forEach((e) =>
         e.remove()
       );
+      clearCompleted.onclick = () => {
+        resolve
+          .filter((e) => e.completed)
+          .forEach((e) => {
+            fetch(mainAPI + e.id, {
+              method: "DELETE",
+            }).then(() => getTasks());
+          });
+      };
       return resolve;
     })
     .then((resolve) => filters[targetFilter](resolve))
@@ -120,21 +131,3 @@ async function getTasks() {
 }
 updateSelectedFilter();
 getTasks();
-
-document.querySelectorAll(".all-tasks input[type='checkbox']").forEach(
-  (e) =>
-    (e.onclick = (e) => {
-      fetch(mainAPI + e.target.parentElement.parentElement.dataset.taskId, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content: "NNNNNNNNNN",
-          completed: true,
-        }),
-      })
-        .then(() => console.log("done"))
-        .then(() => getTasks());
-    })
-);

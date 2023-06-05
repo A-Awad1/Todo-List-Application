@@ -41,7 +41,7 @@ html(dir=dir)
             div
               span.items-left 
               span  #{itemsLeft}
-            button.removeAll.button-text #{removeAll}
+            button.clear-completed.button-text #{removeAll}
         .filters 
           each text,filter in filters ? filters : []
             button(class='button-text')(data-filter=filter) #{text}
