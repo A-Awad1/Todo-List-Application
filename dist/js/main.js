@@ -145,7 +145,17 @@ async function getTasks() {
           destroyPopup = () =>
             [updatePopup, overlay].forEach((e) => e.remove());
           saveButton.onclick = () => {
-            //
+            if (textArea.value.trim() !== e.content) {
+              fetch(mainAPI + e.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  content: textArea.value.trim(),
+                }),
+              }).then(() => getTasks());
+            }
             destroyPopup();
           };
           cancelButton.onclick = () => {
@@ -184,7 +194,7 @@ async function addTask() {
     },
     body: JSON.stringify({
       id: newId,
-      content: addInput.value,
+      content: addInput.value.trim(),
       completed: false,
     }),
   }).then(() => {
