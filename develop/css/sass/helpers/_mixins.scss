@@ -3,10 +3,12 @@
     @content;
   }
 }
-@mixin overlay($color, $opacity) {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: if($color, $color, #000);
-  opacity: if($opacity, $opacity, 0.75);
+
+@mixin content($english, $arabic) {
+  &::after {
+    content: $english;
+    @include rtlStyle {
+      content: $arabic;
+    }
+  }
 }

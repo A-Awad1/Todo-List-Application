@@ -44,7 +44,7 @@ html(dir=dir)
             button.clear-completed.button-text #{removeAll}
         .filters 
           each text,filter in filters ? filters : []
-            button(class='button-text')(data-filter=filter) #{text}
+            button(class='button-text',data-filter=filter) #{text}
         .span.reorder-guide #{reorderGuide}
     //- Font Awesome Library
     script(src="js/all.min.js")

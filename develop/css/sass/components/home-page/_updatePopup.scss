@@ -1,0 +1,40 @@
+.update-popup {
+  position: absolute;
+  width: 100%;
+  min-height: 100px;
+  z-index: 9;
+  background-color: #eee;
+  border-radius: $main-border-radius;
+  padding: $main-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h3 {
+    align-self: center;
+    @include content("Edit", "تعديل");
+  }
+  textarea {
+    border: none;
+    padding: 10px;
+    border-radius: $main-border-radius;
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100px;
+  }
+  > div {
+    display: flex;
+    justify-content: space-evenly;
+    button {
+      color: var(--main-background-color);
+      background-color: var(--main-text-color);
+      border-radius: $main-border-radius;
+      padding: 10px;
+    }
+    .save-button {
+      @include content("Save", "حفظ");
+    }
+    .cancel-button {
+      @include content("Cancel", "الغاء");
+    }
+  }
+}

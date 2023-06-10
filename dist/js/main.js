@@ -120,6 +120,38 @@ async function getTasks() {
         let editTask = document.createElement("button");
         editTask.className = "edit-btn";
         editTask.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
+        editTask.onclick = () => {
+          let overlay = document.createElement("div");
+          overlay.className = "overlay";
+          document.body.appendChild(overlay);
+          let updatePopup = document.createElement("div");
+          updatePopup.className = "update-popup";
+          allTasks.appendChild(updatePopup);
+          let updateTitle = document.createElement("h3");
+          let textArea = document.createElement("textarea");
+          textArea.value = e.content;
+          let buttonsBox = document.createElement("div");
+          let saveButton = document.createElement("button");
+          saveButton.className = "save-button";
+          let cancelButton = document.createElement("button");
+          cancelButton.className = "cancel-button";
+          [saveButton, cancelButton].forEach((e) => buttonsBox.appendChild(e));
+          [updateTitle, textArea, buttonsBox].forEach((e) =>
+            updatePopup.appendChild(e)
+          );
+          textArea.oninput = (event) => {
+            saveButton.disabled = !textArea.value.trim();
+          };
+          destroyPopup = () =>
+            [updatePopup, overlay].forEach((e) => e.remove());
+          saveButton.onclick = () => {
+            //
+            destroyPopup();
+          };
+          cancelButton.onclick = () => {
+            destroyPopup();
+          };
+        };
         let deleteTask = document.createElement("button");
         deleteTask.className = "delete-btn";
         deleteTask.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
