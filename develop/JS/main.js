@@ -130,6 +130,7 @@ async function getTasks() {
           let updateTitle = document.createElement("h3");
           let textArea = document.createElement("textarea");
           textArea.value = e.content;
+          textArea.dir = "auto";
           let buttonsBox = document.createElement("div");
           let saveButton = document.createElement("button");
           saveButton.className = "save-button";
