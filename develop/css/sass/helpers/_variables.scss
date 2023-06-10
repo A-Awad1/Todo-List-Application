@@ -15,6 +15,8 @@ html {
   --sky-color: hsl(192, 100%, 67%);
   --pink-color: hsl(280, 87%, 65%);
   --white-color: hsl(0, 0%, 100%);
+  --second-white-color:hsl(0, 0%, 93%);
+  --brown-color:#333;
 }
 // light mode
 html:not([dark-mode="true"]) {
@@ -33,6 +35,6 @@ html[Dark-mode="true"] {
   --main-text-color: hsl(234, 39%, 85%); // Light Grayish Blue
   --second-text-color: hsl(233, 14%, 35%); // Dark Grayish Blue
   --third-text-color: hsl(240, 9%, 28%); // Very Dark Grayish Blue
-  --main-border-color: hsl(237, 14%, 26%); // Very Dark Grayish Blue  
+  --main-border-color: hsl(237, 14%, 26%); // Very Dark Grayish Blue
   --main-hover-color: hsl(236, 33%, 92%); // Light Grayish Blue (hover)
 }

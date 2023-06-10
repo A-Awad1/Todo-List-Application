@@ -1,9 +1,10 @@
 .update-popup {
+  color: var(--brown-color);
+  background-color: var(--second-white-color);
   position: absolute;
   width: 100%;
   min-height: 100px;
   z-index: 9;
-  background-color: #eee;
   border-radius: $main-border-radius;
   padding: $main-padding;
   display: flex;
@@ -25,8 +26,8 @@
     display: flex;
     justify-content: space-evenly;
     button {
-      color: var(--main-background-color);
-      background-color: var(--main-text-color);
+      color: var(--second-white-color);
+      background-color: var(--brown-color);
       border-radius: $main-border-radius;
       padding: 10px;
     }

@@ -208,3 +208,4 @@ async function addTask() {
 addButton.onclick = () => addTask();
 addInput.onkeypress = (event) =>
   event.key === "Enter" && event.target.value.trim() ? addTask() : null;
+  
