@@ -22,19 +22,19 @@
       "id": 4,
       "content": "Read for 2 hours",
       "completed": false,
-      "order": 5
+      "order": 2
     },
     {
       "id": 5,
       "content": "Pick up groceries",
       "completed": false,
-      "order": 2
+      "order": 6
     },
     {
       "id": 6,
       "content": "Complete Todo App on Frontend Mentor",
       "completed": false,
-      "order": 6
+      "order": 5
     }
   ]
 }
