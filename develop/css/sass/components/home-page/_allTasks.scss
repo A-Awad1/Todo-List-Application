@@ -7,6 +7,10 @@
   .task-box {
     @extend %mainTaskBox;
     border-bottom: 1px solid var(--main-border-color);
+    cursor: grab;
+    &.dragging {
+      opacity: 0.6;
+    }
     &.task-completed > .task-content {
       text-decoration: line-through;
       color: var(--third-text-color);

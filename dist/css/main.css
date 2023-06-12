@@ -385,6 +385,11 @@ html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
 }
 .all-tasks .task-box {
   border-bottom: 1px solid var(--main-border-color);
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.all-tasks .task-box.dragging {
+  opacity: 0.6;
 }
 .all-tasks .task-box.task-completed > .task-content {
   text-decoration: line-through;

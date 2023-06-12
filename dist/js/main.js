@@ -12,18 +12,19 @@ let clearCompleted = document.querySelector(".clear-completed");
 let filterButtons = document.querySelectorAll(".filters>button");
 let reorderGuide = document.querySelector(".reorder-guide");
 let newId;
+let allData;
 
 // language convert
 langButton.onclick = () =>
   location.replace(rootElement.dir === "ltr" ? "index-rtl.html" : ".");
 
 // mode convert
-lightMode = () => {
+let lightMode = () => {
   rootElement.removeAttribute("dark-mode");
   localStorage.removeItem("darkMode");
   modeButton.innerHTML = '<i class="fa-solid fa-moon">';
 };
-darkMode = () => {
+let darkMode = () => {
   rootElement.setAttribute("dark-mode", true);
   localStorage.setItem("darkMode", true);
   modeButton.innerHTML = '<i class="fa-solid fa-sun">';
@@ -82,6 +83,11 @@ async function getTasks() {
       };
       return resolve;
     })
+    .then((resolve) => {
+      allData = resolve;
+      return resolve;
+    })
+    .then((resolve) => resolve.sort((a, b) => (a.order > b.order ? 1 : -1)))
     .then((resolve) => filters[targetFilter](resolve))
     .then((resolve) => {
       reorderGuide.style.display = !resolve.length ? "none" : "block";
@@ -89,8 +95,119 @@ async function getTasks() {
         // main task container box
         let taskBox = document.createElement("div");
         taskBox.classList.add("task-box");
-        taskBox.dataset.taskId = e.id;
+        taskBox.dataset.id = e.id;
+        taskBox.dataset.order = e.order;
         allTasks.appendChild(taskBox);
+        ///////////////////////////////////////////////////////////////
+        taskBox.draggable = true;
+        function allowChildrenEvents() {
+          [...taskBox.children].forEach(
+            (e) => (e.style.pointerEvents = "auto")
+          );
+        }
+        taskBox.ondragstart = () => taskBox.classList.add("dragging");
+        taskBox.ondragend = () => {
+          taskBox.classList.remove("dragging");
+          allowChildrenEvents();
+        };
+        taskBox.ondragenter = (e) => e.preventDefault();
+        taskBox.ondragleave = () => allowChildrenEvents();
+        taskBox.ondragover = (e) => {
+          e.preventDefault();
+          [...taskBox.children].forEach(
+            (e) => (e.style.pointerEvents = "none")
+          );
+        };
+        taskBox.ondrop = (element) => {
+          let draggingItem = allTasks.querySelector(".dragging");
+          if (!taskBox.classList.contains("dragging")) {
+            if (+draggingItem.dataset.order < +element.target.dataset.order) {
+              // from top
+              allData
+                .filter(
+                  (e) =>
+                    +e.order > +draggingItem.dataset.order &&
+                    +e.order < +element.target.dataset.order
+                )
+                .forEach((e) => {
+                  fetch(mainAPI + e.id, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      order: e.order - 1,
+                    }),
+                  });
+                });
+              fetch(mainAPI + +draggingItem.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order - 1,
+                }),
+              });
+              fetch(mainAPI + +element.target.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order,
+                }),
+              }).then(() => getTasks());
+            } else {
+              // from bottom
+              allData
+                .filter(
+                  (e) =>
+                    +e.order < +draggingItem.dataset.order &&
+                    +e.order > +element.target.dataset.order
+                )
+                .forEach((e) => {
+                  fetch(mainAPI + e.id, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      order: e.order + 1,
+                    }),
+                  });
+                });
+              fetch(mainAPI + +draggingItem.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order,
+                }),
+              });
+              fetch(mainAPI + +element.target.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order + 1,
+                }),
+              }).then(() => getTasks());
+            }
+            if (
+              element.layerY >=
+              element.target.offsetTop + element.target.offsetHeight / 2
+            ) {
+              // after
+            } else {
+              // before
+            }
+          }
+          allowChildrenEvents();
+        };
+        ///////////////////////////////////////////////////////////////
         // task checkbox
         let checkboxContainer = document.createElement("div");
         checkboxContainer.className = "checkbox-container";
@@ -208,4 +325,3 @@ async function addTask() {
 addButton.onclick = () => addTask();
 addInput.onkeypress = (event) =>
   event.key === "Enter" && event.target.value.trim() ? addTask() : null;
-  
