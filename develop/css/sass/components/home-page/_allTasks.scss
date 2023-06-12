@@ -8,12 +8,16 @@
     @extend %mainTaskBox;
     border-bottom: 1px solid var(--main-border-color);
     cursor: grab;
-    &.dragging {
-      opacity: 0.6;
-    }
     &.task-completed > .task-content {
       text-decoration: line-through;
       color: var(--third-text-color);
+    }
+    &.dragging {
+      background-color: var(--third-text-color);
+      opacity: 0.5;
+      &.task-completed > .task-content {
+        color: var(--second-text-color);
+      }
     }
     .buttons-box {
       margin-left: auto;

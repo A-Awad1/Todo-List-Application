@@ -388,12 +388,16 @@ html[dir=rtl] .add-task > input[type=text]:placeholder-shown {
   cursor: -webkit-grab;
   cursor: grab;
 }
-.all-tasks .task-box.dragging {
-  opacity: 0.6;
-}
 .all-tasks .task-box.task-completed > .task-content {
   text-decoration: line-through;
   color: var(--third-text-color);
+}
+.all-tasks .task-box.dragging {
+  background-color: var(--third-text-color);
+  opacity: 0.5;
+}
+.all-tasks .task-box.dragging.task-completed > .task-content {
+  color: var(--second-text-color);
 }
 .all-tasks .task-box .buttons-box {
   margin-left: auto;

@@ -11,8 +11,8 @@ let itemsLeft = document.querySelector(".items-left");
 let clearCompleted = document.querySelector(".clear-completed");
 let filterButtons = document.querySelectorAll(".filters>button");
 let reorderGuide = document.querySelector(".reorder-guide");
-let newId;
 let allData;
+let newId;
 
 // language convert
 langButton.onclick = () =>
@@ -105,6 +105,11 @@ async function getTasks() {
             (e) => (e.style.pointerEvents = "auto")
           );
         }
+        function preventChildrenEvents() {
+          [...taskBox.children].forEach(
+            (e) => (e.style.pointerEvents = "none")
+          );
+        }
         taskBox.ondragstart = () => taskBox.classList.add("dragging");
         taskBox.ondragend = () => {
           taskBox.classList.remove("dragging");
@@ -114,172 +119,88 @@ async function getTasks() {
         taskBox.ondragleave = () => allowChildrenEvents();
         taskBox.ondragover = (e) => {
           e.preventDefault();
-          [...taskBox.children].forEach(
-            (e) => (e.style.pointerEvents = "none")
-          );
+          preventChildrenEvents();
         };
         taskBox.ondrop = (element) => {
           let draggingItem = allTasks.querySelector(".dragging");
           if (!taskBox.classList.contains("dragging")) {
+            function updateTargets(a, b) {
+              fetch(mainAPI + +draggingItem.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order + a,
+                }),
+              });
+              fetch(mainAPI + +element.target.dataset.id, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  order: +element.target.dataset.order + b,
+                }),
+              }).then(() => getTasks());
+            }
+            // from top
             if (+draggingItem.dataset.order < +element.target.dataset.order) {
-              // from top
+              // after
+              allData
+                .filter(
+                  (e) =>
+                    +e.order > +draggingItem.dataset.order &&
+                    +e.order < +element.target.dataset.order
+                )
+                .forEach((e) => {
+                  fetch(mainAPI + e.id, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      order: +e.order - 1,
+                    }),
+                  });
+                });
               if (
                 element.layerY >=
                 element.target.offsetTop + element.target.offsetHeight / 2
               ) {
-                // after
-                allData
-                  .filter(
-                    (e) =>
-                      +e.order > +draggingItem.dataset.order &&
-                      +e.order < +element.target.dataset.order
-                  )
-                  .forEach((e) => {
-                    fetch(mainAPI + e.id, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        order: e.order - 1,
-                      }),
-                    });
-                  });
-                fetch(mainAPI + +draggingItem.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order,
-                  }),
-                });
-                fetch(mainAPI + +element.target.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order - 1,
-                  }),
-                }).then(() => getTasks());
+                updateTargets(0, -1);
               } else {
                 // before
-                allData
-                  .filter(
-                    (e) =>
-                      +e.order > +draggingItem.dataset.order &&
-                      +e.order < +element.target.dataset.order
-                  )
-                  .forEach((e) => {
-                    fetch(mainAPI + e.id, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        order: e.order - 1,
-                      }),
-                    });
-                  });
-                fetch(mainAPI + +draggingItem.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order - 1,
-                  }),
-                });
-                fetch(mainAPI + +element.target.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order,
-                  }),
-                }).then(() => getTasks());
+                updateTargets(-1, 0);
               }
             } else {
               // from bottom
+              allData
+                .filter(
+                  (e) =>
+                    +e.order < +draggingItem.dataset.order &&
+                    +e.order > +element.target.dataset.order
+                )
+                .forEach((e) => {
+                  fetch(mainAPI + e.id, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      order: +e.order + 1,
+                    }),
+                  });
+                });
               if (
                 element.layerY >=
                 element.target.offsetTop + element.target.offsetHeight / 2
               ) {
                 // after
-                allData
-                  .filter(
-                    (e) =>
-                      +e.order < +draggingItem.dataset.order &&
-                      +e.order > +element.target.dataset.order
-                  )
-                  .forEach((e) => {
-                    fetch(mainAPI + e.id, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        order: e.order + 1,
-                      }),
-                    });
-                  });
-                fetch(mainAPI + +draggingItem.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order + 1,
-                  }),
-                });
-                fetch(mainAPI + +element.target.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order,
-                  }),
-                }).then(() => getTasks());
+                updateTargets(1, 0);
               } else {
                 // before
-                allData
-                  .filter(
-                    (e) =>
-                      +e.order < +draggingItem.dataset.order &&
-                      +e.order > +element.target.dataset.order
-                  )
-                  .forEach((e) => {
-                    fetch(mainAPI + e.id, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify({
-                        order: e.order + 1,
-                      }),
-                    });
-                  });
-                fetch(mainAPI + +draggingItem.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order,
-                  }),
-                });
-                fetch(mainAPI + +element.target.dataset.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: +element.target.dataset.order + 1,
-                  }),
-                }).then(() => getTasks());
+                updateTargets(0, 1);
               }
             }
           }
