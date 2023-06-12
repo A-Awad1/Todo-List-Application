@@ -1,7 +1,5 @@
 # Todo Application
 
-**Project Progress : ![95%](https://progress-bar.dev/95/?title=done)**
-
 <!-- **[See Website Live]()** -->
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
