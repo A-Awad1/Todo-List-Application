@@ -114,7 +114,7 @@ function watchTask() {
   watch("develop/js/libraries/*.*", jsLibrariesTask);
   watch("develop/images/*.*", imagesTask);
   watch("develop/db.json", jsonTask);
-  // watch("dist/**/*.*", compressTask);
+  watch("dist/**/*.*", compressTask);
 }
 
 exports.default = watchTask;
