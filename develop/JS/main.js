@@ -1,18 +1,19 @@
-let mainAPI = "http://localhost:3000/tasks/";
-let rootElement = document.documentElement;
-let langButton = document.querySelector(".lang-button");
-let modeButton = document.querySelector(".mode-button");
-let addInput = document.querySelector(".add-task>input");
-let addButton = document.querySelector(".add-task>button");
-let allTasks = document.querySelector(".all-tasks");
-let listFooter = document.querySelector(".list-footer");
-let filtersBox = document.querySelector(".filters");
-let itemsLeft = document.querySelector(".items-left");
-let clearCompleted = document.querySelector(".clear-completed");
-let filterButtons = document.querySelectorAll(".filters>button");
-let reorderGuide = document.querySelector(".reorder-guide");
-let allData;
-let newId;
+let mainAPI = "http://localhost:3000/tasks/",
+  rootElement = document.documentElement,
+  langButton = document.querySelector(".lang-button"),
+  modeButton = document.querySelector(".mode-button"),
+  addInput = document.querySelector(".add-task>input"),
+  addButton = document.querySelector(".add-task>button"),
+  allTasks = document.querySelector(".all-tasks"),
+  listFooter = document.querySelector(".list-footer"),
+  filtersBox = document.querySelector(".filters"),
+  itemsLeft = document.querySelector(".items-left"),
+  clearCompleted = document.querySelector(".clear-completed"),
+  filterButtons = document.querySelectorAll(".filters>button"),
+  reorderGuide = document.querySelector(".reorder-guide"),
+  allData,
+  newId,
+  newOrder;
 
 // language convert
 langButton.onclick = () =>
@@ -63,6 +64,7 @@ async function getTasks() {
     // ItemsLeft Number
     .then((resolve) => {
       newId = Math.max(...resolve.map((e) => e.id)) + 1;
+      newOrder = Math.max(...resolve.map((e) => e.order)) + 1;
       !resolve.length
         ? [listFooter, filtersBox, reorderGuide].forEach(
             (e) => (e.style.display = "none")
@@ -72,18 +74,8 @@ async function getTasks() {
       [...document.getElementsByClassName("task-box")].forEach((e) =>
         e.remove()
       );
-      clearCompleted.onclick = () => {
-        resolve
-          .filter((e) => e.completed)
-          .forEach((e) => {
-            fetch(mainAPI + e.id, {
-              method: "DELETE",
-            }).then(() => getTasks());
-          });
-      };
-      return resolve;
-    })
-    .then((resolve) => {
+      clearCompleted.onclick = () =>
+        resolve.filter((e) => e.completed).forEach((e) => delTask(e.id));
       allData = resolve;
       return resolve;
     })
@@ -118,7 +110,7 @@ async function getTasks() {
         taskBox.ondragleave = () => allowChildrenEvents();
         taskBox.ondragover = (e) => {
           e.preventDefault();
-          preventChildrenEvents(); 
+          preventChildrenEvents();
         };
         taskBox.ondrop = (element) => {
           let draggingItem = allTasks.querySelector(".dragging");
@@ -229,7 +221,7 @@ async function getTasks() {
           [updateTitle, textArea, buttonsBox].forEach((e) =>
             updatePopup.appendChild(e)
           );
-          textArea.oninput = (event) => {
+          textArea.oninput = () => {
             saveButton.disabled = !textArea.value.trim();
           };
           destroyPopup = () =>
@@ -248,18 +240,12 @@ async function getTasks() {
             }
             destroyPopup();
           };
-          cancelButton.onclick = () => {
-            destroyPopup();
-          };
+          cancelButton.onclick = () => destroyPopup();
         };
         let deleteTask = document.createElement("button");
         deleteTask.className = "delete-btn";
         deleteTask.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-        deleteTask.onclick = () => {
-          fetch(mainAPI + e.id, {
-            method: "DELETE",
-          }).then(() => getTasks());
-        };
+        deleteTask.onclick = () => delTask(e.id);
         [editTask, deleteTask].forEach((e) => buttonsBox.appendChild(e));
         taskBox.appendChild(buttonsBox);
         // check task completed
@@ -269,13 +255,12 @@ async function getTasks() {
           taskCheckBox.checked = true;
         }
       });
-      return resolve;
     });
 }
 updateSelectedFilter();
 getTasks();
 
-// add task to api
+// add task
 async function addTask() {
   return await fetch(mainAPI, {
     method: "POST",
@@ -286,12 +271,20 @@ async function addTask() {
       id: newId,
       content: addInput.value.trim(),
       completed: false,
+      order: newOrder,
     }),
   }).then(() => {
     addInput.value = "";
     addButton.disabled = true;
     getTasks();
   });
+}
+
+// delete task
+async function delTask(id) {
+  return await fetch(mainAPI + id, {
+    method: "DELETE",
+  }).then(() => getTasks());
 }
 
 addButton.onclick = () => addTask();
