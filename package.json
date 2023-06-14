@@ -20,6 +20,9 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-zip": "^5.1.0",
-    "sass": "^1.58.0"
+    "json-server": "^0.17.3",
+    "netlify-cli": "^15.5.1",
+    "sass": "^1.58.0",
+    "serverless-http": "^3.2.0"
   }
 }
