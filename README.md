@@ -46,6 +46,6 @@ Mobile Screen - Dark Mode - Arabic:
 
 ![Output](/Output-design-screenshots/3.png)
 
-Mobile Screen update Popup - Light Mode - English:
+Mobile Screen update Popup - Light Mode - Arabic:
 
 ![Output](/Output-design-screenshots/4.png)
