@@ -1,4 +1,4 @@
-let mainAPI = "http://localhost:5000/tasks/",
+let mainAPI = "https://your-site.netlify.app/api/tasks/",
   rootElement = document.documentElement,
   langButton = document.querySelector(".lang-button"),
   modeButton = document.querySelector(".mode-button"),
