@@ -1,2 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[dev]
+  command = "npm run start"  # سيتم تشغيله عند تشغيل موقعك
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [functions]
-  directory = "netlify/functions" # يحتوي على ملف lambda لتشغيل json-server
+  directory = "functions" # يحتوي على ملف lambda لتشغيل json-server
