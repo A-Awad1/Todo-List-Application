@@ -98,7 +98,6 @@ async function getTasks() {
         taskBox.dataset.id = e.id;
         taskBox.dataset.order = e.order;
         allTasks.appendChild(taskBox);
-        ///////////////////////////////////////////////////////////////
         taskBox.draggable = true;
         function allowChildrenEvents() {
           [...taskBox.children].forEach(
@@ -119,7 +118,7 @@ async function getTasks() {
         taskBox.ondragleave = () => allowChildrenEvents();
         taskBox.ondragover = (e) => {
           e.preventDefault();
-          preventChildrenEvents();
+          preventChildrenEvents(); 
         };
         taskBox.ondrop = (element) => {
           let draggingItem = allTasks.querySelector(".dragging");
@@ -133,25 +132,28 @@ async function getTasks() {
                 body: JSON.stringify({
                   order: +element.target.dataset.order + a,
                 }),
+              }).then(() => {
+                fetch(mainAPI + +element.target.dataset.id, {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    order: +element.target.dataset.order + b,
+                  }),
+                }).then(() => getTasks());
               });
-              fetch(mainAPI + +element.target.dataset.id, {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  order: +element.target.dataset.order + b,
-                }),
-              }).then(() => getTasks());
             }
-            // from top
-            if (+draggingItem.dataset.order < +element.target.dataset.order) {
-              // after
+            function updateBetweenTargets(position) {
               allData
                 .filter(
-                  (e) =>
-                    +e.order > +draggingItem.dataset.order &&
-                    +e.order < +element.target.dataset.order
+                  position === "top"
+                    ? (e) =>
+                        e.order > +draggingItem.dataset.order &&
+                        e.order < +element.target.dataset.order
+                    : (e) =>
+                        e.order < +draggingItem.dataset.order &&
+                        e.order > +element.target.dataset.order
                 )
                 .forEach((e) => {
                   fetch(mainAPI + e.id, {
@@ -160,53 +162,24 @@ async function getTasks() {
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                      order: +e.order - 1,
+                      order: position === "top" ? e.order - 1 : e.order + 1,
                     }),
                   });
                 });
-              if (
-                element.layerY >=
-                element.target.offsetTop + element.target.offsetHeight / 2
-              ) {
-                updateTargets(0, -1);
-              } else {
-                // before
-                updateTargets(-1, 0);
-              }
-            } else {
-              // from bottom
-              allData
-                .filter(
-                  (e) =>
-                    +e.order < +draggingItem.dataset.order &&
-                    +e.order > +element.target.dataset.order
-                )
-                .forEach((e) => {
-                  fetch(mainAPI + e.id, {
-                    method: "PATCH",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      order: +e.order + 1,
-                    }),
-                  });
-                });
-              if (
-                element.layerY >=
-                element.target.offsetTop + element.target.offsetHeight / 2
-              ) {
-                // after
-                updateTargets(1, 0);
-              } else {
-                // before
-                updateTargets(0, 1);
-              }
             }
+            function updateTasksOrders(position, a, b) {
+              updateBetweenTargets(position);
+              element.layerY >=
+              element.target.offsetTop + element.target.offsetHeight / 2
+                ? updateTargets(a, b)
+                : updateTargets(b, a);
+            }
+            +draggingItem.dataset.order < +element.target.dataset.order
+              ? updateTasksOrders("top", 0, -1)
+              : updateTasksOrders("bottom", 1, 0);
           }
           allowChildrenEvents();
         };
-        ///////////////////////////////////////////////////////////////
         // task checkbox
         let checkboxContainer = document.createElement("div");
         checkboxContainer.className = "checkbox-container";
