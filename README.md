@@ -9,7 +9,7 @@ This project is responsive in all devices.
 Features:
 
 - Multilingual application that contains both English and Arabic languages and can switch between them
-- Contains full CRUD operations for tasks
+- Contains full CRUD operations for tasks they interact with JSON API
 - Add new task to the list
 - update task on the list
 - Delete task from the list
@@ -27,6 +27,7 @@ Technologies Used:
 - SCSS
 - JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
 - Gulp
+- Json Server
 - Font Awesome Library
 
 <!-- **[See Website Live]()** -->
