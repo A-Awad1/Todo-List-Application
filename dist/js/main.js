@@ -1,4 +1,4 @@
-let mainAPI = "https://serene-swan-fc134f.netlify.app/.netlify/functions/json-server",
+let mainAPI = "/.netlify/functions/json-server/tasks",
   rootElement = document.documentElement,
   langButton = document.querySelector(".lang-button"),
   modeButton = document.querySelector(".mode-button"),

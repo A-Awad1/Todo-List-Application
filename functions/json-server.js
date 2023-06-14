@@ -1,4 +1,7 @@
-var data = {
+const jsonServer = require("json-server");
+const serverless = require("serverless-http");
+
+let data = {
   tasks: [
     {
       id: 1,
@@ -39,8 +42,6 @@ var data = {
   ],
 };
 
-const jsonServer = require("json-server");
-const serverless = require("serverless-http");
 
 const server = jsonServer.create();
 const router = jsonServer.router(data);
