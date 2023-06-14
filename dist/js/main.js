@@ -1,4 +1,4 @@
-let mainAPI = "https://your-site.netlify.app/api/tasks/",
+let mainAPI = "https://steady-bublanina-a43673.netlify.app/api/tasks/",
   rootElement = document.documentElement,
   langButton = document.querySelector(".lang-button"),
   modeButton = document.querySelector(".mode-button"),
