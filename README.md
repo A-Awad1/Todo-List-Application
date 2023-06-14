@@ -30,18 +30,21 @@ Technologies Used:
 - Font Awesome Library
 
 <!-- **[See Website Live]()** -->
-<!--
+
 Output design Screenshots:
 
-Large Screens :
+Large Screen - Light Mode - English:
 
 ![Output](/Output-design-screenshots/1.png)
 
-Medium Screens:
+Mobile Screen - Dark Mode - English:
 
 ![Output](/Output-design-screenshots/2.png)
 
-Mobile Screens:
+Mobile Screen - Dark Mode - Arabic:
 
 ![Output](/Output-design-screenshots/3.png)
- -->
+
+Mobile Screen update Popup - Light Mode - English:
+
+![Output](/Output-design-screenshots/4.png)
