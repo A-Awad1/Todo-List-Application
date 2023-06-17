@@ -38,7 +38,7 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 2. Watch on Json Server API from this command
 
 ```
-json-server --watch develop/db.json --port 3000
+json-server --watch dist/db.json --port 3000
 ```
 
 ## Output design Screenshots:
