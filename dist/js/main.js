@@ -1,4 +1,4 @@
-let mainAPI = "http://localhost:3001/tasks/",
+let mainAPI = "http://localhost:3000/tasks/",
   rootElement = document.documentElement,
   langButton = document.querySelector(".lang-button"),
   modeButton = document.querySelector(".mode-button"),

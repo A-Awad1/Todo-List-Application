@@ -4,9 +4,7 @@
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 
-This project is responsive in all devices.
-
-Features:
+## Features:
 
 - Multilingual application that contains both English and Arabic languages and can switch between them
 - Contains full CRUD operations for tasks they interact with JSON API
@@ -21,18 +19,29 @@ Features:
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
 
-Technologies Used:
+## Technologies Used:
 
 - Pug
 - SCSS
 - JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
 - Gulp
-- Json Server
 - Font Awesome Library
+- Json Server
 
 <!-- **[See Website Live]()** -->
 
-Output design Screenshots:
+## Run Project
+
+###
+
+1. Open dist/index.html
+2. Watch on Json Server API from this command
+
+```
+json-server --watch develop/db.json --port 3000
+```
+
+## Output design Screenshots:
 
 Large Screen - Light Mode - English:
 

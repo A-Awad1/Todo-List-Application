@@ -7,10 +7,7 @@ const concat = require("gulp-concat"),
   uglify = require("gulp-uglify"),
   notify = require("gulp-notify"),
   zip = require("gulp-zip"),
-  connect = require("gulp-connect"),
-  jsonServer = require("gulp-json-srv");
-
-var server = jsonServer.create();
+  connect = require("gulp-connect");
 
 // convert pug Files to html files
 function pugTask() {
@@ -90,10 +87,6 @@ function compressTask() {
   // .pipe(notify("Files have been compressed"));
 }
 
-function jsonServerWatch() {
-  return src("develop/db.json").pipe(server.pipe());
-}
-
 // watch
 function watchTask() {
   pugTask();
@@ -105,7 +98,6 @@ function watchTask() {
   imagesTask();
   jsonTask();
   compressTask();
-  jsonServerWatch();
   connect.server({
     root: "./dist",
     port: 7000,
