@@ -1,6 +1,6 @@
 # Todo Application
 
-Version of Vanilla Javascript Using Local Storage
+Version of Vanilla Javascript Using Local Storage.
 
 <!-- **[See Website Live]()** -->
 
@@ -29,11 +29,11 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 - Gulp
 - Font Awesome Library
 
-<!-- **[See Website Live]()** -->
-
 ## Run Project
 
-Open dist/index.html
+Only Open dist/index.html
+
+<!-- **[See Website Live]()** -->
 
 ## Output design Screenshots:
 
