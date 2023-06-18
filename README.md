@@ -1,5 +1,7 @@
 # Todo Application
 
+Version of Vanilla Javascript Using Json Server
+
 <!-- **[See Website Live]()** -->
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
