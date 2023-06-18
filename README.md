@@ -1,6 +1,6 @@
 # Todo Application
 
-Version of Vanilla Javascript Using Json Server
+Version of Vanilla Javascript Using Local Storage
 
 <!-- **[See Website Live]()** -->
 
@@ -9,7 +9,7 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 ## Features:
 
 - Multilingual application that contains both English and Arabic languages and can switch between them
-- Contains full CRUD operations for tasks they interact with JSON API
+- Contains full CRUD operations for tasks they interact with Local Storage
 - Add new task to the list
 - update task on the list
 - Delete task from the list
@@ -28,20 +28,12 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 - JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
 - Gulp
 - Font Awesome Library
-- Json Server
 
 <!-- **[See Website Live]()** -->
 
 ## Run Project
 
-###
-
-1. Open dist/index.html
-2. Watch on Json Server API from this command
-
-```
-json-server --watch dist/db.json --port 3000
-```
+Open dist/index.html
 
 ## Output design Screenshots:
 
