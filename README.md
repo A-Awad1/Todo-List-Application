@@ -1,6 +1,4 @@
-# Todo Application
-
-Version of Vanilla Javascript Using Local Storage.
+# Todo Application (Version of Vanilla Javascript Using Local Storage)
 
 **[See Application Live](https://todo-list-app-a-awad.netlify.app/)**
 
