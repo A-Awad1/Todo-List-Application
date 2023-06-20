@@ -10,7 +10,6 @@ let rootElement = document.documentElement,
   clearCompleted = document.querySelector(".clear-completed"),
   filterButtons = document.querySelectorAll(".filters>button"),
   reorderGuide = document.querySelector(".reorder-guide"),
-  allData,
   newId,
   newOrder;
 
@@ -76,7 +75,6 @@ function getTasks() {
       updateLocalStorage();
       getTasks();
     };
-    allData = tasksArray;
     let sortedTasks = tasksArray.sort((a, b) => (a.order > b.order ? 1 : -1));
     let filteredTasks = filters[targetFilter](sortedTasks);
 
@@ -111,28 +109,15 @@ function getTasks() {
         let draggingItem = allTasks.querySelector(".dragging");
         if (!taskBox.classList.contains("dragging")) {
           function updateTargets(a, b) {
-            fetch(mainAPI + +draggingItem.dataset.id, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                order: +element.target.dataset.order + a,
-              }),
-            }).then(() => {
-              fetch(mainAPI + +element.target.dataset.id, {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  order: +element.target.dataset.order + b,
-                }),
-              }).then(() => getTasks());
-            });
+            tasksArray.filter(
+              (e) => e.id === +draggingItem.dataset.id
+            )[0].order = +element.target.dataset.order + a;
+            tasksArray.filter(
+              (e) => e.id === +element.target.dataset.id
+            )[0].order = +element.target.dataset.order + b;
           }
           function updateBetweenTargets(position) {
-            allData
+            tasksArray
               .filter(
                 position === "top"
                   ? (e) =>
@@ -143,15 +128,7 @@ function getTasks() {
                       e.order > +element.target.dataset.order
               )
               .forEach((e) => {
-                fetch(mainAPI + e.id, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    order: position === "top" ? e.order - 1 : e.order + 1,
-                  }),
-                });
+                e.order = position === "top" ? e.order - 1 : e.order + 1;
               });
           }
           function updateTasksOrders(position, a, b) {
@@ -160,6 +137,8 @@ function getTasks() {
             element.target.offsetTop + element.target.offsetHeight / 2
               ? updateTargets(a, b)
               : updateTargets(b, a);
+            updateLocalStorage();
+            getTasks();
           }
           +draggingItem.dataset.order < +element.target.dataset.order
             ? updateTasksOrders("top", 0, -1)
