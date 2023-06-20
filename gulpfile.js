@@ -76,11 +76,6 @@ function imagesTask() {
   return src("develop/images/*.*").pipe(dest("dist/images"));
 }
 
-// add json files in dist folder
-function jsonTask() {
-  return src("develop/db.json").pipe(dest("dist"));
-}
-
 // compress all files in dist folder
 function compressTask() {
   return src("dist/**/*.*").pipe(zip("website.zip")).pipe(dest("."));
@@ -96,7 +91,6 @@ function watchTask() {
   jsLibrariesTask();
   fontAwesomeTask();
   imagesTask();
-  jsonTask();
   compressTask();
   connect.server({
     root: "./dist",
@@ -112,7 +106,6 @@ function watchTask() {
   watch("develop/css/libraries/*.*", cssLibrariesTask);
   watch("develop/js/libraries/*.*", jsLibrariesTask);
   watch("develop/images/*.*", imagesTask);
-  watch("develop/db.json", jsonTask);
   watch("dist/**/*.*", compressTask);
 }
 
@@ -124,5 +117,4 @@ exports.cssLibrariesTask = cssLibrariesTask;
 exports.jsLibrariesTask = jsLibrariesTask;
 exports.fontAwesomeTask = fontAwesomeTask;
 exports.imagesTask = imagesTask;
-exports.jsonTask = jsonTask;
 exports.compressTask = compressTask;
