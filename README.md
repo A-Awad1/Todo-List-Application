@@ -1,8 +1,6 @@
-# Todo Application
+# Todo Application (Version of Vanilla Javascript Using Json Server)
 
-Version of Vanilla Javascript Using Json Server
-
-<!-- **[See Website Live]()** -->
+**[See Application Live](https://todo-list-app-a-awad.netlify.app/)** (version of Local Storage)
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 
@@ -30,7 +28,7 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 - Font Awesome Library
 - Json Server
 
-<!-- **[See Website Live]()** -->
+**[See Application Live](https://todo-list-app-a-awad.netlify.app/)** (version of Local Storage)
 
 ## Run Project
 
