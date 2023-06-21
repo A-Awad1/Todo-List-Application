@@ -1,13 +1,13 @@
-# Todo Application (Version of Vanilla Javascript Using Json Server)
+# Todo Application (Version of VUE 3 Using Local Storage)
 
-**[See Application Live](https://todo-list-app-a-awad.netlify.app/)** (version of Local Storage)
+<!-- **[See Application Live]()** -->
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 
 ## Features:
 
 - Multilingual application that contains both English and Arabic languages and can switch between them
-- Contains full CRUD operations for tasks they interact with JSON API
+- Contains full CRUD operations for tasks they interact with Local Storage
 - Add new task to the list
 - update task on the list
 - Delete task from the list
@@ -21,24 +21,34 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 
 ## Technologies Used:
 
+- Vue 3
+- Vuex
+- Vue Router
 - Pug
 - SCSS
-- JavaScript (ECMAScript , DOM , BOM , AJAX , Api)
-- Gulp
+- JavaScript (ECMAScript, BOM)
 - Font Awesome Library
-- Json Server
 
-**[See Application Live](https://todo-list-app-a-awad.netlify.app/)** (version of Local Storage)
+<!-- **[See Application Live]()** -->
 
 ## Run Project
 
-###
-
-1. Open dist/index.html
-2. Watch on Json Server API from this command
+### installs dependencies
 
 ```
-json-server --watch dist/db.json --port 3000
+npm install
+```
+
+### Compiles and hot-reloads for development
+
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
 ```
 
 ## Output design Screenshots:
