@@ -15,11 +15,11 @@ html {
   --sky-color: hsl(192, 100%, 67%);
   --pink-color: hsl(280, 87%, 65%);
   --white-color: hsl(0, 0%, 100%);
-  --second-white-color:hsl(0, 0%, 93%);
-  --brown-color:#333;
+  --second-white-color: hsl(0, 0%, 93%);
+  --brown-color: #333;
 }
 // light mode
-html:not([dark-mode="true"]) {
+html:not([data-dark-mode="true"]) {
   --page-background-color: hsl(0, 0%, 98%); // Very Dark Desaturated Blue
   --main-background-color: hsl(0, 0%, 98%); // Very Dark Desaturated Blue
   --main-text-color: hsl(235, 19%, 35%); // Very Dark Grayish Blue
@@ -29,7 +29,7 @@ html:not([dark-mode="true"]) {
   --main-hover-color: hsl(235, 19%, 35%); // Very Dark Grayish Blue
 }
 // dark mode
-html[Dark-mode="true"] {
+html[data-dark-mode="true"] {
   --page-background-color: hsl(235, 21%, 11%); // Very Dark Blue
   --main-background-color: hsl(235, 24%, 19%); // Very Dark Desaturated Blue
   --main-text-color: hsl(234, 39%, 85%); // Light Grayish Blue

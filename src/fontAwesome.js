@@ -6,14 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // import specific icons
 import {
-  faMagnifyingGlass,
-  faAngleDown,
-  faArrowLeftLong,
+  faGlobe,
+  faMoon,
+  faSun,
+  faPlus,
+  faPenToSquare,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { faMoon } from "@fortawesome/free-regular-svg-icons";
+// import { faMoon } from "@fortawesome/free-regular-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 // add icons to the library
-library.add(faTwitter, faMoon, faMagnifyingGlass, faAngleDown, faArrowLeftLong);
+library.add(faGlobe, faSun, faMoon, faPlus, faTwitter, faPenToSquare, faXmark);
 
 export default FontAwesomeIcon;

@@ -1,0 +1,13 @@
+  {
+  "dir": "ltr",
+  "appName": "TODO",
+  "addPlaceHolder": "Create a new todo...",
+  "itemsLeft": "items left",
+  "filters": {
+    "all": "all",
+    "active": "active",
+    "completed": "completed"
+  },
+  "removeAll": "Clear Completed",
+  "reorderGuide": "Drag and drop to reorder list"
+}

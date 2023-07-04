@@ -31,6 +31,7 @@ optgroup {
 html {
   min-width: fit-content;
 }
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
 body {
   font: {
     family: "Josefin Sans", sans-serif;
@@ -39,21 +40,21 @@ body {
   }
   background: {
     color: var(--page-background-color);
-    image: url(../images/bg-desktop-light.jpg);
+    image: url(@/assets/bg-desktop-light.jpg);
     repeat: no-repeat;
     size: 100% 250px;
   }
   @include underTablet {
-    background-image: url(../images/bg-mobile-light.jpg);
+    background-image: url(@/assets/bg-mobile-light.jpg);
     font-size: 16px;
   }
   @include underLargeMobile {
     background-size: auto 250px;
   }
-  html[Dark-mode="true"] & {
-    background-image: url(../images/bg-desktop-dark.jpg);
+  html[data-dark-mode="true"] & {
+    background-image: url(@/assets/bg-desktop-dark.jpg);
     @include underTablet {
-      background-image: url(../images/bg-mobile-dark.jpg);
+      background-image: url(@/assets/bg-mobile-dark.jpg);
     }
   }
 }
