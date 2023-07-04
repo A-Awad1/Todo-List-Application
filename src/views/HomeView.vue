@@ -32,9 +32,26 @@
         <div class="all-tasks">
           <div
             :class="['task-box', { 'task-completed': task.completed }]"
-            draggable="true"
             v-for="task in filteredTasks"
             :key="task.id"
+            draggable="true"
+            @dragstart="
+              $event.target.classList.add('dragging');
+              draggingId = task.id;
+              draggingOrder = task.order;
+            "
+            @dragend="
+              $event.target.classList.remove('dragging');
+              allowChildrenEvents($event);
+            "
+            @dragleave="allowChildrenEvents"
+            @dragover.prevent="preventChildrenEvents"
+            @dragenter.prevent
+            @drop="
+              droppingId = task.id;
+              droppingOrder = task.order;
+              draggingDrop($event);
+            "
           >
             <div class="checkbox-container">
               <input
@@ -55,7 +72,6 @@
               >
                 <font-awesome-icon icon="fa-solid fa-pen-to-square" />
               </button>
-              <!-- start popup  -->
               <div
                 class="update-popup"
                 v-if="updatePopup && updatedId === task.id"
@@ -77,7 +93,6 @@
                   ></button>
                 </div>
               </div>
-              <!-- end popup -->
               <button class="delete-btn" @click="deleteTask(task.id)">
                 <font-awesome-icon icon="fa-solid fa-xmark" />
               </button>
@@ -133,17 +148,28 @@ export default {
       updatedId: 0,
       updatePopup: false,
       updatedContent: null,
+      draggingId: 0,
+      draggingOrder: 0,
+      droppingId: 0,
+      droppingOrder: 0,
     };
   },
   computed: {
     newId: function () {
-      return Math.max(...this.tasks.map((e) => e.id)) + 1;
+      return this.tasks.length
+        ? Math.max(...this.tasks.map((e) => e.id)) + 1
+        : 1;
     },
     newOrder: function () {
-      return Math.max(...this.tasks.map((e) => e.order)) + 1;
+      return this.tasks.length
+        ? Math.max(...this.tasks.map((e) => e.order)) + 1
+        : 1;
+    },
+    sortedTasks: function () {
+      return this.tasks.slice(0).sort((a, b) => (a.order > b.order ? 1 : -1));
     },
     filteredTasks: function () {
-      return filters[this.filterShow](this.tasks);
+      return filters[this.filterShow](this.sortedTasks);
     },
     itemsLeft: function () {
       return this.tasks.filter((e) => !e.completed).length;
@@ -187,6 +213,49 @@ export default {
       this.tasks.filter((e) => e.id === id)[0].content =
         this.$refs.updatedContent[0].value;
       this.toggleUpdatePopup();
+    },
+    allowChildrenEvents: function (event) {
+      [...event.target.children].forEach(
+        (e) => (e.style.pointerEvents = "auto")
+      );
+    },
+    preventChildrenEvents: function (event) {
+      [...event.target.children].forEach(
+        (e) => (e.style.pointerEvents = "none")
+      );
+    },
+    updateTargets: function (a, b) {
+      this.tasks.filter((e) => e.id === this.draggingId)[0].order =
+        this.droppingOrder + a;
+      this.tasks.filter((e) => e.id === this.droppingId)[0].order =
+        this.droppingOrder + b;
+    },
+    updateBetweenTargets: function (position) {
+      this.tasks
+        .filter(
+          position === "top"
+            ? (e) =>
+                e.order > this.draggingOrder && e.order < this.droppingOrder
+            : (e) =>
+                e.order < this.draggingOrder && e.order > this.droppingOrder
+        )
+        .forEach((e) => {
+          e.order = position === "top" ? e.order - 1 : e.order + 1;
+        });
+    },
+    updateTasksOrders: function (event, position, a, b) {
+      this.updateBetweenTargets(position);
+      event.layerY >= event.target.offsetTop + event.target.offsetHeight / 2
+        ? this.updateTargets(a, b)
+        : this.updateTargets(b, a);
+    },
+    draggingDrop: function (event) {
+      if (!event.target.classList.contains("dragging")) {
+        this.draggingOrder < this.droppingOrder
+          ? this.updateTasksOrders(event, "top", 0, -1)
+          : this.updateTasksOrders(event, "bottom", 1, 0);
+      }
+      this.allowChildrenEvents(event);
     },
   },
   watch: {
