@@ -1,33 +1,8 @@
 <template>
   <main>
     <section>
-      <header>
-        <span v-t="'appName'"></span>
-        <div>
-          <button class="mode-button" @click="darkMode = !darkMode">
-            <font-awesome-icon icon="fa-solid fa-sun" v-if="darkMode" />
-            <font-awesome-icon icon="fa-solid fa-moon" v-else />
-          </button>
-          <button class="lang-button" @click="changeLang">
-            <font-awesome-icon icon="fa-solid fa-globe" />
-          </button>
-        </div>
-      </header>
-      <div class="add-task">
-        <div class="checkbox-container">
-          <input type="checkbox" />
-        </div>
-        <input
-          type="text"
-          dir="auto"
-          v-model.trim="newTask"
-          :placeholder="$t('addPlaceHolder')"
-          @keyup.enter="addTask"
-        />
-        <button :disabled="!newTask" @click="addTask">
-          <font-awesome-icon icon="fa-solid fa-plus" />
-        </button>
-      </div>
+      <AppHeader />
+      <AddTask />
       <template v-if="tasks.length">
         <div class="all-tasks">
           <div
@@ -56,8 +31,10 @@
             <div class="checkbox-container">
               <input
                 type="checkbox"
-                v-model="task.completed"
-                @click="completeTask(task.id, task.completed)"
+                :checked="task.completed"
+                @input="
+                  updateTaskProperty([task.id, 'completed', !task.completed])
+                "
               />
             </div>
             <p class="task-content" v-text="task.content"></p>
@@ -85,7 +62,14 @@
                 <div>
                   <button
                     class="save-button"
-                    @click="updateTaskContent(task.id)"
+                    @click="
+                      updateTaskProperty([
+                        task.id,
+                        'content',
+                        this.$refs.updatedContent[0].value,
+                      ]);
+                      toggleUpdatePopup();
+                    "
                   ></button>
                   <button
                     class="cancel-button"
@@ -132,6 +116,10 @@
 </template>
 
 <script>
+import AppHeader from "@/components/AppHeader.vue";
+import AddTask from "@/components/AddTask.vue";
+import { mapMutations, mapState } from "vuex";
+
 let filters = {
   all: (allTasks) => allTasks,
   active: (allTasks) => allTasks.filter((e) => !e.completed),
@@ -141,9 +129,6 @@ export default {
   name: "HomeView",
   data: function () {
     return {
-      darkMode: false,
-      tasks: [],
-      newTask: "",
       filterShow: "all",
       updatedId: 0,
       updatePopup: false,
@@ -155,16 +140,7 @@ export default {
     };
   },
   computed: {
-    newId: function () {
-      return this.tasks.length
-        ? Math.max(...this.tasks.map((e) => e.id)) + 1
-        : 1;
-    },
-    newOrder: function () {
-      return this.tasks.length
-        ? Math.max(...this.tasks.map((e) => e.order)) + 1
-        : 1;
-    },
+    ...mapState(["tasks"]),
     sortedTasks: function () {
       return this.tasks.slice(0).sort((a, b) => (a.order > b.order ? 1 : -1));
     },
@@ -176,43 +152,15 @@ export default {
     },
   },
   methods: {
-    updateDir: function () {
-      document.documentElement.dir = this.$t("dir");
-    },
-    changeLang: function () {
-      this.$router
-        .push({
-          params: {
-            lang: this.$route.params.lang === "en" ? "ar" : "en",
-          },
-        })
-        .then(() => this.updateDir());
-    },
-    addTask: function () {
-      this.tasks.push({
-        id: this.newId,
-        content: this.newTask,
-        completed: false,
-        order: this.newOrder,
-      });
-      this.newTask = "";
-    },
+    ...mapMutations(["updateTasks", "updateTaskProperty"]),
     deleteTask: function (id) {
-      this.tasks = this.tasks.filter((e) => e.id !== id);
-    },
-    completeTask: function (id, status) {
-      this.tasks.filter((e) => e.id === id)[0].completed = !status;
+      this.updateTasks(this.tasks.filter((e) => e.id !== id));
     },
     clearCompleted: function () {
-      this.tasks = this.tasks.filter((e) => !e.completed);
+      this.updateTasks(this.tasks.filter((e) => !e.completed));
     },
     toggleUpdatePopup: function () {
       this.updatePopup = !this.updatePopup;
-    },
-    updateTaskContent: function (id) {
-      this.tasks.filter((e) => e.id === id)[0].content =
-        this.$refs.updatedContent[0].value;
-      this.toggleUpdatePopup();
     },
     allowChildrenEvents: function (event) {
       [...event.target.children].forEach(
@@ -225,13 +173,20 @@ export default {
       );
     },
     updateTargets: function (a, b) {
-      this.tasks.filter((e) => e.id === this.draggingId)[0].order =
-        this.droppingOrder + a;
-      this.tasks.filter((e) => e.id === this.droppingId)[0].order =
-        this.droppingOrder + b;
+      this.updateTaskProperty([
+        this.draggingId,
+        "order",
+        this.droppingOrder + a,
+      ]);
+      this.updateTaskProperty([
+        this.droppingId,
+        "order",
+        this.droppingOrder + b,
+      ]);
     },
     updateBetweenTargets: function (position) {
-      this.tasks
+      let tasks = JSON.parse(JSON.stringify(this.tasks));
+      tasks
         .filter(
           position === "top"
             ? (e) =>
@@ -242,6 +197,7 @@ export default {
         .forEach((e) => {
           e.order = position === "top" ? e.order - 1 : e.order + 1;
         });
+      this.updateTasks(tasks);
     },
     updateTasksOrders: function (event, position, a, b) {
       this.updateBetweenTargets(position);
@@ -259,10 +215,6 @@ export default {
     },
   },
   watch: {
-    darkMode: function (v) {
-      localStorage.darkMode = JSON.parse(v);
-      document.documentElement.dataset.darkMode = v;
-    },
     tasks: {
       handler: function (v) {
         localStorage.tasks = JSON.stringify(v);
@@ -271,9 +223,11 @@ export default {
     },
   },
   mounted() {
-    this.tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-    this.darkMode = localStorage.darkMode === "true";
-    this.updateDir();
+    this.updateTasks(localStorage.tasks ? JSON.parse(localStorage.tasks) : []);
+  },
+  components: {
+    AppHeader,
+    AddTask,
   },
 };
 </script>
@@ -299,33 +253,6 @@ main {
       font-size: 16px;
       margin: 20px auto;
       width: fit-content;
-    }
-  }
-}
-.add-task {
-  background-color: var(--main-background-color);
-  border-radius: $main-border-radius;
-  margin: 30px 0 20px;
-  min-width: 300px;
-  @extend %mainTaskBox;
-  > {
-    .checkbox-container {
-      pointer-events: none;
-    }
-    input[type="text"] {
-      width: 100%;
-      border: none;
-      background-color: transparent;
-      color: var(--main-text-color);
-      caret-color: var(--bright-blue);
-      &::placeholder {
-        color: var(--second-text-color);
-      }
-      @include rtlStyle {
-        &:placeholder-shown {
-          direction: rtl;
-        }
-      }
     }
   }
 }
@@ -388,36 +315,6 @@ main {
       color: var(--bright-blue);
     }
     transition: color $main-transition;
-  }
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--white-color);
-  font-size: 25px;
-  span {
-    font: {
-      weight: 700;
-      size: 35px;
-    }
-    letter-spacing: 13px;
-    @include underTablet {
-      font-size: 30px;
-    }
-    @include rtlStyle {
-      letter-spacing: 0;
-    }
-  }
-  > div {
-    display: flex;
-    gap: 15px;
-    button {
-      svg {
-        color: var(--white-color);
-        font-size: 25px;
-      }
-    }
   }
 }
 .list-footer {
