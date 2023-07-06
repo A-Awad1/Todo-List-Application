@@ -1,6 +1,6 @@
 # Todo Application (Version of Vanilla Javascript Using Local Storage)
 
-**[See Application Live](https://todo-list-app-a-awad.netlify.app/)**
+**[See Application Live](https://todo-list-app-vanilla-js-a-awad.netlify.app/)**
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 
@@ -31,7 +31,7 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 
 Only Open dist/index.html
 
-**[See Application Live](https://todo-list-app-a-awad.netlify.app/)**
+**[See Application Live](https://todo-list-app-vanilla-js-a-awad.netlify.app/)**
 
 ## Output design Screenshots:
 
