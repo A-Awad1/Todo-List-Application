@@ -2,13 +2,11 @@
   <div class="list-footer">
     <div>
       <span class="items-left" v-text="`${itemsLeft} `"></span>
-      <span v-t="'itemsLeft'"></span>
+      <span>{{ $t("itemsLeft") }}</span>
     </div>
-    <button
-      class="clear-completed button-text"
-      v-t="'removeAll'"
-      @click="clearCompleted"
-    ></button>
+    <button class="clear-completed button-text" @click="clearCompleted">
+      {{ $t("removeAll") }}
+    </button>
   </div>
 </template>
 

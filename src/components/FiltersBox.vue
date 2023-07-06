@@ -5,8 +5,8 @@
       :key="filter"
       :data-filter="filter"
       v-text="text"
-      :class="['button-text', { selected: filterShow === text }]"
-      @click="updateFilterShow(text)"
+      :class="['button-text', { selected: filterShow === filter }]"
+      @click="updateFilterShow(filter)"
     ></button>
   </div>
 </template>

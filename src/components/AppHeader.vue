@@ -1,6 +1,6 @@
 <template>
   <header>
-    <span v-t="'appName'"></span>
+    <span>{{ $t("appName") }}</span>
     <div>
       <button class="mode-button" @click="darkMode = !darkMode">
         <font-awesome-icon icon="fa-solid fa-sun" v-if="darkMode" />
