@@ -20,7 +20,7 @@
 import { mapState, mapMutations } from "vuex";
 
 export default {
-  name: "HomeView",
+  name: "AddTask",
   data: function () {
     return {
       newTask: "",
@@ -51,8 +51,6 @@ export default {
       this.newTask = "";
     },
   },
-  watch: {},
-  mounted() {},
 };
 </script>
 

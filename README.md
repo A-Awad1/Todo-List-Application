@@ -1,6 +1,6 @@
 # Todo Application (Version of VUE 3 Using Local Storage)
 
-<!-- **[See Application Live]()** -->
+**[See Application Live]()**
 
 This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW).
 
@@ -24,12 +24,12 @@ This project is a challenge from [Frontend Mentor](https://www.frontendmentor.io
 - Vue 3
 - Vuex
 - Vue Router
-- Pug
+- i18n plugin
 - SCSS
 - JavaScript (ECMAScript, BOM)
 - Font Awesome Library
 
-<!-- **[See Application Live]()** -->
+**[See Application Live]()**
 
 ## Run Project
 

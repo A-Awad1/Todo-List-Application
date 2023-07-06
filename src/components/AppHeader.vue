@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "HomeView",
+  name: "AppHeader",
   data: function () {
     return {
       darkMode: false,
