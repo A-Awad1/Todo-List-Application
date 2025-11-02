@@ -1,4 +1,4 @@
-# Todo Application (Version of VUE 3 Using Local Storage)
+# Todo List Application (Version of VUE 3 Using Local Storage)
 
 **[See Application Live](https://todo-list-app-vue3-a-awad.netlify.app/)**
 
