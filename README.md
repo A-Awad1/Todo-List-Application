@@ -1,4 +1,4 @@
-# Todo Application (Version of Vanilla Javascript Using Json Server)
+# Todo List Application (Version of Vanilla Javascript Using Json Server)
 
 **[See Application Live](https://todo-list-app-vanilla-js-a-awad.netlify.app/)** (version of Local Storage)
 
